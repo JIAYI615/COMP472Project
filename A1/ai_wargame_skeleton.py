@@ -313,6 +313,12 @@ class Game:
         """Validate a move expressed as a CoordPair. TODO: WRITE MISSING CODE!!!"""
         if not self.is_valid_coord(coords.src) or not self.is_valid_coord(coords.dst):
             return False
+        # If the user wants to self destroy a coord:
+        if coords.src.row==coords.dst.row and coords.src.col==coords.dst.col:
+            return True
+        # If the dst and the src are not aroung each other:
+        if not (abs(coords.src.row-coords.dst.row) ==1 and abs(coords.src.col-coords.dst.col) ==0):
+            return False
         unit = self.get(coords.src)
         if unit is None or unit.player != self.next_player:
             return False
