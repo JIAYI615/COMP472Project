@@ -311,23 +311,130 @@ class Game:
 
     def is_valid_move(self, coords : CoordPair) -> bool:
         """Validate a move expressed as a CoordPair. TODO: WRITE MISSING CODE!!!"""
+        
+        #check is the entered current unit place and the entered target unit are valid
         if not self.is_valid_coord(coords.src) or not self.is_valid_coord(coords.dst):
             return False
-        # If the user wants to self destroy a coord:
-        if coords.src.row==coords.dst.row and coords.src.col==coords.dst.col:
-            return True
-        # If the dst and the src are not aroung each other:
-        if not (abs(coords.src.row-coords.dst.row) ==1 and abs(coords.src.col-coords.dst.col) ==0):
-            return False
-        unit = self.get(coords.src)
+        
+        unit = self.get(coords.src) #current unit
+        unit2 = self.get(coords.dst) #destination unit
+        
+        # check if the user enters an empty coord and if the user tries to move other user's coord
         if unit is None or unit.player != self.next_player:
             return False
-        unit = self.get(coords.dst)
-        return (unit is None)
+        
+        # If the user wants to self destroy a coord, always valid:
+        if coords.src.row == coords.dst.row and coords.src.col == coords.dst.col:
+            return True
+        
+        # Check if the dst and the src are next to each other:
+        if not (abs(coords.src.row-coords.dst.row) ==1 and abs(coords.src.col-coords.dst.col) ==0):
+            if not (abs(coords.src.row-coords.dst.row) ==0 and abs(coords.src.col-coords.dst.col) ==1):
+                return False
+        
+        # if the current player is attacker
+        if unit.player.name == "Attacker":
+            # print("------ATTACKER------")
+            #check if the target coord is empty
+            if unit2 is None: #if the target coord is empty
+                #collect the coords in adjacent except for the target coord
+                coordAround = coords.src.iter_adjacent()
+                isInCombat = False
+                for i in coordAround:
+                     # if i is out of board, skip
+                    if not self.is_valid_coord(i):
+                        continue
+                    # if i is empty, skip
+                    if self.get(i) is None:
+                        continue
+                    # if find enemy's unit, info needed get, break
+                    if self.get(i).player.name != unit.player.name:
+                        isInCombat = True
+                        break
+                if isInCombat:
+                    if unit.type.name == "Virus":   #virus can go no matter is in combat or not
+                        return True
+                    else:
+                        return False    #Sorry, AI, Firewall, and Program can't move when in combat
+                else:   #no combat
+                    if unit.type.name == "Virus":
+                        return True
+                    else:   #need to check if it's going up/left or not
+                        if coords.src.row < coords.dst.row or coords.src.col < coords.dst.col:
+                            return False    #invalid if going down/right
+                        else:
+                            return True                   
+            else:   #if the target coord is not empty, so it's either attack or repair
+                if unit2.player.name != unit.player.name:   #So it's an attack
+                    return True     #attack is always valid right?
+                else:   #So it tries to repair, need to check if it's possible to perform repair
+                    if unit.type.name == "AI":   #Only tech and AI can repair, attacker doesn't have tech, so only AI can repair
+                        if unit2.type.name == "Virus":  # Attacker's AI can only cure virus, check if it's the right type
+                            if unit2.health == 9:   #correct type, but very healthy....no need to repair
+                                return False
+                            else:   #do need repair
+                                return True
+                        else:   #other type can't be cured
+                            return False
+                       
+                    else:   #The type is not AI, you can't repair anyways
+                        return False
+
+        # if the current player is defender:
+        if unit.player.name == "Defender":
+            # print("-----DEFENDER-----")
+            if unit2 is None: #if the target coord is empty
+                #collect the coords in adjacent except for the target coord
+                coordAround = coords.src.iter_adjacent()
+                isInCombat = False
+                for i in coordAround:
+                     # if i is out of board, skip
+                    if not self.is_valid_coord(i):
+                        continue
+                    # if i is empty, skip
+                    if self.get(i) is None:
+                        continue
+                    # if find enemy's unit, info needed get, break
+                    if self.get(i).player.name != unit.player.name:
+                        isInCombat = True
+                        break
+                if isInCombat:
+                    if unit.type.name == "Tech":   #Tech can go no matter is in combat or not
+                        return True
+                    else:
+                        return False    #Sorry, AI, Firewall, and Program can't move when in combat
+                else:   #no combat
+                    if unit.type.name == "Tech":
+                        return True
+                    else:   #need to check if it's going down/right or not
+                        if coords.src.row > coords.dst.row or coords.src.col > coords.dst.col:
+                            return False    #invalid if going up/left
+                        else:
+                            return True                   
+            else:   #if the target coord is not empty, so it's either attack or repair
+                if unit2.player.name != unit.player.name:   #So it's an attack
+                    return True     #attack is always valid right?
+                else:   #So it tries to repair, need to check if it's possible to perform repair
+                    if unit.type.name == "AI" or unit.type.name == "Tech":   #Only tech and AI can repair, defender has both
+                        if unit.type.name == "AI":  #if AI's gonna repair:
+                            if unit2.type.name == "Tech":   #Defender's AI can only cure tech
+                                if unit2.health == 9:   #Very healthy....no need to repair
+                                    return False
+                                else:   #do need repair
+                                    return True
+                        else:   #if tech's gonna repair
+                            if unit2.type.name == "Program" or unit2.type.name == "AI" or unit2.type.name == "Firewall":    #only AI, firewall, and program can be cured by tech
+                                if unit2.health == 9:   #Very healthy....no need to repair
+                                    return False
+                                else:   #do need repair
+                                    return True
+                    else:   #The type is not AI or tech, you can't repair anyways
+                        return False
 
     def perform_move(self, coords : CoordPair) -> Tuple[bool,str]:
         """Validate and perform a move expressed as a CoordPair. TODO: WRITE MISSING CODE!!!"""
         if self.is_valid_move(coords):
+            # print("-----MOVE FORM TO-----"+coords.to_string())
             self.set(coords.dst,self.get(coords.src))
             self.set(coords.src,None)
             return (True,"")
