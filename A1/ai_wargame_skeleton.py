@@ -431,14 +431,43 @@ class Game:
                     else:   #The type is not AI or tech, you can't repair anyways
                         return False
 
-    def perform_move(self, coords : CoordPair) -> Tuple[bool,str]:
-        """Validate and perform a move expressed as a CoordPair. TODO: WRITE MISSING CODE!!!"""
-        if self.is_valid_move(coords):
-            # print("-----MOVE FORM TO-----"+coords.to_string())
-            self.set(coords.dst,self.get(coords.src))
-            self.set(coords.src,None)
-            return (True,"")
-        return (False,"invalid move")
+    def perform_move(self, coords: CoordPair) -> Tuple[bool, str]:
+    """Validate and perform a move expressed as a CoordPair."""
+    
+    # Step 1: Validate the move
+    if not self.is_valid_move(coords):
+        return (False, "Invalid move")
+    
+    # Step 2: Update the game state
+    moving_unit = self.get(coords.src)
+    target_unit = self.get(coords.dst)
+    
+    # If moving to an empty space
+    if target_unit is None:
+        self.set(coords.dst, moving_unit)
+        self.set(coords.src, None)
+    # If moving to a space occupied by an opponent's unit
+    elif target_unit.player != moving_unit.player:
+        # Handle combat logic here (e.g., damage the target unit)
+        damage = moving_unit.damage_amount(target_unit)
+        target_unit.mod_health(-damage)
+        self.remove_dead(coords.dst)
+        if not target_unit.is_alive():  # If the target unit is destroyed
+            self.set(coords.dst, moving_unit)
+            self.set(coords.src, None)
+        else:
+            # If the target unit survives, the moving unit remains in its original position
+            pass
+    # If moving to a space occupied by an ally
+    else:
+        # Handle repair or other logic here
+        repair = moving_unit.repair_amount(target_unit)
+        target_unit.mod_health(repair)
+    
+    # Step 3: Handle any other special cases (if any)
+    
+    # Step 4: Return the result
+    return (True, "Move successful")
 
     def next_turn(self):
         """Transitions game to the next turn."""
