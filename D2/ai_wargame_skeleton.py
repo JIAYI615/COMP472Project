@@ -700,6 +700,7 @@ class Game:
         #this is the Max layer
         if depth %2 == 0:
             best_score = MIN_HEURISTIC_SCORE
+            depth_evaluation_score = 0
             best_move = None
             for i in game.move_candidates():
                 # print(depth)
@@ -713,16 +714,21 @@ class Game:
                 (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue)
                 # print(str(eval))
                 #update the max value
+                depth_evaluation_score = eval + depth_evaluation_score
                 if eval > best_score:
                     best_score = max(eval, best_score)
                     best_move = i
             #return the max value
+            newGame.stats.evaluations_per_depth[depth] = depth_evaluation_score
+            # newGame.stats.evaluations_per_depth[depth] = best_score
             return (best_score, best_move, avg_depth)
 
         
         #this is the min layer
         else:
             best_score = MAX_HEURISTIC_SCORE
+            best_move = None
+            depth_evaluation_score = 0
             for i in game.move_candidates():
                 # print(depth)
                 # print(str(game.next_player.name))
@@ -733,10 +739,13 @@ class Game:
                 newGame.next_turn()
                 (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue)
                 #update the best value
+                depth_evaluation_score = eval + depth_evaluation_score
                 if eval < best_score:
                     best_score = min(eval, best_score)
                     best_move = i
             #return the max value
+            newGame.stats.evaluations_per_depth[depth] = depth_evaluation_score
+            # newGame.stats.evaluations_per_depth[depth] = best_score
             return (best_score, best_move, avg_depth)
     
     def evaluate0(self, player : int) -> float:
