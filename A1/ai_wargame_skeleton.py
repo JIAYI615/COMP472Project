@@ -423,12 +423,16 @@ class Game:
                                     return False
                                 else:   #do need repair
                                     return True
+                            else: #not tech, wrong type, can't repair
+                                return False
                         else:   #if tech's gonna repair
                             if unit2.type.name == "Program" or unit2.type.name == "AI" or unit2.type.name == "Firewall":    #only AI, firewall, and program can be cured by tech
                                 if unit2.health == 9:   #Very healthy....no need to repair
                                     return False
                                 else:   #do need repair
                                     return True
+                            else: #wrong type, can't repair
+                                return False
                     else:   #The type is not AI or tech, you can't repair anyways
                         return False
 
