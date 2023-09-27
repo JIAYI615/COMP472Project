@@ -432,43 +432,80 @@ class Game:
                     else:   #The type is not AI or tech, you can't repair anyways
                         return False
 
-    def perform_move(self, coords: CoordPair) -> Tuple[bool, str]:
-    """Validate and perform a move expressed as a CoordPair."""
-    
-    # Step 1: Validate the move
-    if not self.is_valid_move(coords):
-        return (False, "Invalid move")
-    
-    # Step 2: Update the game state
-    moving_unit = self.get(coords.src)
-    target_unit = self.get(coords.dst)
-    
-    # If moving to an empty space
-    if target_unit is None:
-        self.set(coords.dst, moving_unit)
-        self.set(coords.src, None)
-    # If moving to a space occupied by an opponent's unit
-    elif target_unit.player != moving_unit.player:
-        # Handle combat logic here (e.g., damage the target unit)
-        damage = moving_unit.damage_amount(target_unit)
-        target_unit.mod_health(-damage)
-        self.remove_dead(coords.dst)
-        if not target_unit.is_alive():  # If the target unit is destroyed
-            self.set(coords.dst, moving_unit)
-            self.set(coords.src, None)
-        else:
-            # If the target unit survives, the moving unit remains in its original position
-            pass
-    # If moving to a space occupied by an ally
-    else:
-        # Handle repair or other logic here
-        repair = moving_unit.repair_amount(target_unit)
-        target_unit.mod_health(repair)
-    
-    # Step 3: Handle any other special cases (if any)
-    
-    # Step 4: Return the result
-    return (True, "Move successful")
+    def perform_move(self, coords : CoordPair) -> Tuple[bool,str]:
+        """Validate and perform a move expressed as a CoordPair. TODO: WRITE MISSING CODE!!!"""
+        if self.is_valid_move(coords):
+            if self.get(coords.dst) is None: #if move to an empty coord
+            # print("-----MOVE FORM TO-----"+coords.to_string())
+                unit1 = self.get(coords.src)
+                unit2 = self.get(coords.dst)
+                srcrow = str(coords.src.row)
+                srccol= str(coords.src.col)
+                dstrow = str(coords.dst.row)
+                dstcol= str(coords.dst.col)
+                self.set(coords.dst,self.get(coords.src))
+                self.set(coords.src,None)
+                successString = self.next_player.name + " moves " + unit1.type.name + " from (" + srcrow + " , "+ srccol +") to " "(" + dstrow + " , "+ dstcol +")" 
+                return (True, successString)
+            
+            elif coords.src ==coords.dst: #if want to destroy it self
+                unit1 = self.get(coords.src)
+                srcrow = str(coords.src.row)
+                srccol= str(coords.src.col)
+                for i in coords.src.iter_range(1):
+                    #if the place of the i is out of boarder
+                    if not self.is_valid_coord(i):
+                        continue
+                    # if i is empty, skip
+                    if self.get(i) is None:
+                        continue
+
+                    #DON'T REMOVE!! This check is super important, I don't know what but without this we'll have bugs in minimax
+                    if i.row == coords.src.row and i.col == coords.src.col:
+                        continue
+
+                    #then change the health
+                    # print(str(i.row) + " , " + str(i.col))
+                    # health_change = self.get(coords.src).damage_amount(self.get(i))
+                    # self.mod_health(i, -health_change)
+                    self.mod_health(i, -2)
+                # print(self.get(coords.src).type)
+                self.get(coords.src).health = 0
+                self.remove_dead(coords.src)
+                # if self.get(coords.src).type == UnitType.AI:
+                #     if self.get(coords.src).player == Player.Attacker:
+                #         self._attacker_has_ai = False
+                successString = self.next_player.name + " destroy " + unit1.type.name + " at (" + srcrow + " , "+ srccol + ")"
+                return (True, successString)
+            
+            elif self.get(coords.src).player.name == self.get(coords.dst).player.name: #if it's repair
+                unit1 = self.get(coords.src)
+                unit2 = self.get(coords.dst)
+                srcrow = str(coords.src.row)
+                srccol= str(coords.src.col)
+                dstrow = str(coords.dst.row)
+                dstcol= str(coords.dst.col)
+                health_change = self.get(coords.src).repair_amount(self.get(coords.dst))
+                self.mod_health(coords.dst, health_change)
+                successString = self.next_player.name + " used unit " + unit1.type.name +" at (" +srcrow + " , "+srccol+ ") repair the unit " + unit2.type.name + " at (" + dstrow + " , "+dstcol +")" 
+                return (True, successString)
+            
+            elif self.get(coords.src).player.name != self.get(coords.dst).player.name: #if it's attack
+                unit1 = self.get(coords.src)
+                unit2 = self.get(coords.dst)
+                srcrow = str(coords.src.row)
+                srccol= str(coords.src.col)
+                dstrow = str(coords.dst.row)
+                dstcol= str(coords.dst.col)
+                health_change1 = self.get(coords.src).damage_amount(self.get(coords.dst))
+                health_change2 = self.get(coords.dst).damage_amount(self.get(coords.src))
+                self.mod_health(coords.dst, -health_change1)
+                self.mod_health(coords.src, -health_change2)
+                self.remove_dead(coords.dst)
+                self.remove_dead(coords.src)
+                successString = self.next_player.name + " used unit " + unit1.type.name +" at (" +srcrow + " , "+ srccol+ ") attack the unit " + unit2.type.name +" at (" + dstrow + " , "+ dstcol +" )" 
+                return (True, successString)
+        return (False,"invalid move")
 
     def next_turn(self):
         """Transitions game to the next turn."""
