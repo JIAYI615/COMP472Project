@@ -616,9 +616,13 @@ class Game:
         if mv is not None:
             (success,result) = self.perform_move(mv)
             if success:
+                self.last_move = mv
                 print(f"Computer {self.next_player.name}: ",end='')
                 print(result)
                 self.next_turn()
+        #if the ai fail to find a move in the max time limit, AI lose
+        else:
+            winner = self.next_player.next()
         return mv
 
     def player_units(self, player: Player) -> Iterable[Tuple[Coord,Unit]]:
@@ -669,7 +673,7 @@ class Game:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
         start_time = datetime.now()
         # (score, move, avg_depth) = self.random_move()
-        (score, move, avg_depth) = self.miniMax(self.clone(), self.options.max_depth, self.next_player.value)
+        (score, move, avg_depth) = self.miniMax(self.clone(), self.options.max_depth, self.next_player.value,start_time)
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
         print(f"Heuristic score: {score}")
@@ -684,7 +688,7 @@ class Game:
         print(f"Elapsed time: {elapsed_seconds:0.1f}s")
         return move
     
-    def miniMax(self, game : Game, depth : int, playerValue : int)-> Tuple[int, CoordPair | None, float]:
+    def miniMax(self, game : Game, depth : int, playerValue : int, start_time)-> Tuple[int, CoordPair | None, float]:
         #if reach the end of the adversarial tree or find a goal state no matter who wins, no need to generate children, want to save time
         if depth < 1 or game.has_winner():
             # print(str(playerValue))
@@ -702,7 +706,13 @@ class Game:
             best_score = MIN_HEURISTIC_SCORE
             depth_evaluation_score = 0
             best_move = None
-            for i in game.move_candidates():
+            avg_depth = 0
+            random_move_candidates = list(game.move_candidates())
+            random.shuffle(random_move_candidates)
+            for i in random_move_candidates:
+            # for i in game.move_candidates():
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time:
+                    return (best_score, best_move, avg_depth)
                 # print(depth)
                 # print(str(game.next_player.name))
                 newGame = game.clone()
@@ -711,7 +721,7 @@ class Game:
                 # print(str(newGame.get(i.src).health))
                 newGame.perform_move(i)
                 newGame.next_turn()
-                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue)
+                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue,start_time)
                 # print(str(eval))
                 #update the max value
                 depth_evaluation_score = eval + depth_evaluation_score
@@ -730,7 +740,14 @@ class Game:
             best_score = MAX_HEURISTIC_SCORE
             best_move = None
             depth_evaluation_score = 0
-            for i in game.move_candidates():
+            avg_depth = 0
+            random_move_candidates = list(game.move_candidates())
+            random.shuffle(random_move_candidates)
+            for i in random_move_candidates:
+            # for i in game.move_candidates():
+                #if AI exceed the time
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time:
+                    return (best_score, best_move, avg_depth)
                 # print(depth)
                 # print(str(game.next_player.name))
                 newGame = game.clone()
@@ -738,7 +755,7 @@ class Game:
                 # print("( " + str(i.src.row) + " , " + str(i.src.col)+" )" + " to " + "( " + str(i.dst.row) + " , " + str(i.dst.col)+" )")
                 newGame.perform_move(i)
                 newGame.next_turn()
-                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue)
+                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue,start_time)
                 #update the best value
                 depth_evaluation_score = eval + depth_evaluation_score
                 # print("Min layer " + str(eval))
@@ -881,6 +898,7 @@ def main():
     while True:
         print()
         print(game)
+        global winner
         winner = game.has_winner()
         if winner is not None:
             print(f"{winner.name} wins!")
