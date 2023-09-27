@@ -240,6 +240,7 @@ class Stats:
 @dataclass(slots=True)
 class Game:
     """Representation of the game state."""
+    last_move : CoordPair = None
     board: list[list[Unit | None]] = field(default_factory=list)
     next_player: Player = Player.Attacker
     turns_played : int = 0
@@ -500,6 +501,29 @@ class Game:
                     output += f"{str(unit):^3} "
             output += "\n"
         return output
+    
+    def print_board(self) -> str:
+        dim = self.options.dim
+        coord = Coord()
+        output = ""
+        for col in range(dim):
+            coord.col = col
+            label = coord.col_string()
+            output += f"{label:^3} "
+        output += "\n"
+        for row in range(dim):
+            coord.row = row
+            label = coord.row_string()
+            output += f"{label}: "
+            for col in range(dim):
+                coord.col = col
+                unit = self.get(coord)
+                if unit is None:
+                    output += " .  "
+                else:
+                    output += f"{str(unit):^3} "
+            output += "\n"
+        return output
 
     def __str__(self) -> str:
         """Default string representation of a game."""
@@ -518,6 +542,7 @@ class Game:
             s = input(F'Player {self.next_player.name}, enter your move: ')
             coords = CoordPair.from_string(s)
             if coords is not None and self.is_valid_coord(coords.src) and self.is_valid_coord(coords.dst):
+                self.last_move = coords
                 return coords
             else:
                 print('Invalid coordinates! Try again.')
@@ -672,6 +697,11 @@ class Game:
 
 ##############################################################################################################
 
+def boolean_string(s):
+    return s.lower() == 'true'
+
+##############################################################################################################
+
 def main():
     # parse command line arguments
     parser = argparse.ArgumentParser(
@@ -681,6 +711,8 @@ def main():
     parser.add_argument('--max_time', type=float, help='maximum search time')
     parser.add_argument('--game_type', type=str, default="manual", help='game type: auto|attacker|defender|manual')
     parser.add_argument('--broker', type=str, help='play via a game broker')
+    parser.add_argument('--max_turns', type=int, help='maximum number of moves before end of game')
+    parser.add_argument('--alpha_beta', type=boolean_string, default=False, help='true:ai uses alpha-beta; false: ai uses minimax')
     args = parser.parse_args()
 
     # parse the game type
@@ -701,11 +733,25 @@ def main():
         options.max_depth = args.max_depth
     if args.max_time is not None:
         options.max_time = args.max_time
+    if args.max_turns is not None:
+        options.max_turns = args.max_turns
     if args.broker is not None:
         options.broker = args.broker
 
+    
+    playerOne = 'H' if game_type == GameType.AttackerVsComp or game_type == GameType.AttackerVsDefender else 'AI'
+    playerTwo = 'H\n\n' if game_type == GameType.CompVsDefender or game_type == GameType.AttackerVsDefender else 'AI\n\n'
+
+    f = open(f'gameTrace-{str(args.alpha_beta).lower()}-{str(options.max_time)}-{str(options.max_turns)}.txt', 'w')
+    f.write('Game Parameters:\n- game timeout (seconds): ' + str(options.max_time) +
+            '\n- max turns: ' + str(options.max_turns) +
+            '\n- Player 1 : ' + playerOne +
+            '\n- Player 2 : ' + playerTwo)
+
     # create a new game
     game = Game(options=options)
+
+    f.write('Initial board configuration:\n\n' + Game.print_board(game) + '\n\n\n')
 
     # the main game loop
     while True:
@@ -714,6 +760,7 @@ def main():
         winner = game.has_winner()
         if winner is not None:
             print(f"{winner.name} wins!")
+            f.write(f'\n{winner.name} wins in {game.turns_played} turns!')
             break
         if game.options.game_type == GameType.AttackerVsDefender:
             game.human_turn()
@@ -728,7 +775,13 @@ def main():
                 game.post_move_to_broker(move)
             else:
                 print("Computer doesn't know what to do!!!")
+                f.close()
                 exit(1)
+        f.write('Turn #' + str(game.turns_played) + 
+                '\nPlayer: ' + game.next_player.next().name +
+                '\nMove: ' + str(game.last_move) + 
+                '\n' + Game.print_board(game) + '\n\n')
+    f.close()
 
 ##############################################################################################################
 
