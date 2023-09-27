@@ -715,6 +715,7 @@ class Game:
                 # print(str(eval))
                 #update the max value
                 depth_evaluation_score = eval + depth_evaluation_score
+                # print("max layer "+str(eval))
                 if eval > best_score:
                     best_score = max(eval, best_score)
                     best_move = i
@@ -740,6 +741,7 @@ class Game:
                 (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue)
                 #update the best value
                 depth_evaluation_score = eval + depth_evaluation_score
+                # print("Min layer " + str(eval))
                 if eval < best_score:
                     best_score = min(eval, best_score)
                     best_move = i
