@@ -1,0 +1,1634 @@
+Game Parameters:
+- game timeout (seconds): 5.0
+- max turns: 100
+- Player 1 : AI
+- Player 2 : AI
+
+Initial board configuration:
+
+ 0   1   2   3   4  
+A: dA9 dT9 dF9  .   .  
+B: dT9 dP9  .   .   .  
+C: dF9  .   .   .  aP9 
+D:  .   .   .  aF9 aV9 
+E:  .   .  aP9 aV9 aA9 
+
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9972 2: -10011 3: 9978
+Eval perf.: 1.9876743789792486k/s
+Elapsed time: 5.000316s
+
+Turn #1
+Player: Attacker
+Move: E2 D2
+ 0   1   2   3   4  
+A: dA9 dT9 dF9  .   .  
+B: dT9 dP9  .   .   .  
+C: dF9  .   .   .  aP9 
+D:  .   .  aP9 aF9 aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10044 2: -10014 3: 10014
+Eval perf.: 1.0043397396156233k/s
+Elapsed time: 5.000284s
+
+Turn #2
+Player: Defender
+Move: A2 B2
+ 0   1   2   3   4  
+A: dA9 dT9  .   .   .  
+B: dT9 dP9 dF9  .   .  
+C: dF9  .   .   .  aP9 
+D:  .   .  aP9 aF9 aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9930 2: 1999989950 3: 9978
+Eval perf.: 133322.91584312398k/s
+Elapsed time: 5.000646s
+
+Turn #3
+Player: Attacker
+Move: D2 C2
+ 0   1   2   3   4  
+A: dA9 dT9  .   .   .  
+B: dT9 dP9 dF9  .   .  
+C: dF9  .  aP9  .  aP9 
+D:  .   .   .  aF9 aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10014 2: -10014 3: 9978
+Eval perf.: 0.49886749878245434k/s
+Elapsed time: 5.000057s
+
+Turn #4
+Player: Defender
+Move: B1 C1
+ 0   1   2   3   4  
+A: dA9 dT9  .   .   .  
+B: dT9  .  dF9  .   .  
+C: dF9 dP9 aP9  .  aP9 
+D:  .   .   .  aF9 aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9930 2: -10050 3: 9978
+Eval perf.: 0.39429702036965286k/s
+Elapsed time: 5.000154s
+
+Turn #5
+Player: Attacker
+Move: C4 C3
+ 0   1   2   3   4  
+A: dA9 dT9  .   .   .  
+B: dT9  .  dF9  .   .  
+C: dF9 dP9 aP9 aP9  .  
+D:  .   .   .  aF9 aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -10047 3: 10014
+Eval perf.: 0.33258296066631515k/s
+Elapsed time: 5.00008s
+
+Turn #6
+Player: Defender
+Move: A1 B1
+ 0   1   2   3   4  
+A: dA9  .   .   .   .  
+B: dT9 dT9 dF9  .   .  
+C: dF9 dP9 aP9 aP9  .  
+D:  .   .   .  aF9 aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10047 2: -10014 3: 9981
+Eval perf.: 0.28609979271621466k/s
+Elapsed time: 5.000236s
+
+Turn #7
+Player: Attacker
+Move: C3 B3
+ 0   1   2   3   4  
+A: dA9  .   .   .   .  
+B: dT9 dT9 dF9 aP9  .  
+C: dF9 dP9 aP9  .   .  
+D:  .   .   .  aF9 aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9966 2: -10014 3: 10014
+Eval perf.: 0.24913675215320424k/s
+Elapsed time: 5.000354s
+
+Turn #8
+Player: Defender
+Move: B2 C2
+ 0   1   2   3   4  
+A: dA9  .   .   .   .  
+B: dT9 dT9 dF8 aP9  .  
+C: dF9 dP9 aP8  .   .  
+D:  .   .   .  aF9 aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10014 2: -9969 3: 10014
+Eval perf.: 0.22352174000575167k/s
+Elapsed time: 5.000207s
+
+Turn #9
+Player: Attacker
+Move: D3 C3
+ 0   1   2   3   4  
+A: dA9  .   .   .   .  
+B: dT9 dT9 dF8 aP9  .  
+C: dF9 dP9 aP8 aF9  .  
+D:  .   .   .   .  aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9972 2: -10011 3: 10020
+Eval perf.: 0.19960958037990414k/s
+Elapsed time: 5.000276s
+
+Turn #10
+Player: Defender
+Move: C0 D0
+ 0   1   2   3   4  
+A: dA9  .   .   .   .  
+B: dT9 dT9 dF8 aP9  .  
+C:  .  dP9 aP8 aF9  .  
+D: dF9  .   .   .  aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9930 2: -10014 3: 9966
+Eval perf.: 0.17964482026646625k/s
+Elapsed time: 5.005934s
+
+Turn #11
+Player: Attacker
+Move: C2 B2
+ 0   1   2   3   4  
+A: dA9  .   .   .   .  
+B: dT9 dT9 dF7 aP9  .  
+C:  .  dP9 aP7 aF9  .  
+D: dF9  .   .   .  aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9975 2: -9969 3: 10014
+Eval perf.: 0.16697552417108194k/s
+Elapsed time: 5.000251s
+
+Turn #12
+Player: Defender
+Move: A0 A1
+ 0   1   2   3   4  
+A:  .  dA9  .   .   .  
+B: dT9 dT9 dF7 aP9  .  
+C:  .  dP9 aP7 aF9  .  
+D: dF9  .   .   .  aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10056 2: -10017 3: 10005
+Eval perf.: 0.15450208365534088k/s
+Elapsed time: 5.000037s
+
+Turn #13
+Player: Attacker
+Move: B3 B2
+ 0   1   2   3   4  
+A:  .  dA9  .   .   .  
+B: dT9 dT9 dF6 aP8  .  
+C:  .  dP9 aP7 aF9  .  
+D: dF9  .   .   .  aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9978 2: -9966 3: 10014
+Eval perf.: 0.1432102957489725k/s
+Elapsed time: 5.000101s
+
+Turn #14
+Player: Defender
+Move: A1 A2
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF6 aP8  .  
+C:  .  dP9 aP7 aF9  .  
+D: dF9  .   .   .  aV9 
+E:  .   .   .  aV9 aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -9984 3: 10011
+Eval perf.: 0.13382396788864695k/s
+Elapsed time: 5.000052s
+
+Turn #15
+Player: Attacker
+Move: E3 E2
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF6 aP8  .  
+C:  .  dP9 aP7 aF9  .  
+D: dF9  .   .   .  aV9 
+E:  .   .  aV9  .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10014 2: -10014 3: 10014
+Eval perf.: 0.12516072541926593k/s
+Elapsed time: 5.000139s
+
+Turn #16
+Player: Defender
+Move: C1 C2
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF6 aP8  .  
+C:  .  dP6 aP4 aF9  .  
+D: dF9  .   .   .  aV9 
+E:  .   .  aV9  .  aA9 
+
+
+Heuristic score: -3
+Average recursive depth: 0
+Evals per depth:  1: 9966 2: -10008 3: 10005
+Eval perf.: 0.11719885214999548k/s
+Elapsed time: 5.000241s
+
+Turn #17
+Player: Attacker
+Move: D4 C4
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF6 aP8  .  
+C:  .  dP6 aP4 aF9 aV9 
+D: dF9  .   .   .   .  
+E:  .   .  aV9  .  aA9 
+
+
+Heuristic score: 3
+Average recursive depth: 0
+Evals per depth:  1: 10023 2: -9951 3: 10008
+Eval perf.: 0.11198815414191741k/s
+Elapsed time: 5.000155s
+
+Turn #18
+Player: Defender
+Move: C1 C2
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF6 aP8  .  
+C:  .  dP3 aP1 aF9 aV9 
+D: dF9  .   .   .   .  
+E:  .   .  aV9  .  aA9 
+
+
+Heuristic score: -3
+Average recursive depth: 0
+Evals per depth:  1: 10005 2: -10002 3: 9948
+Eval perf.: 0.1047366742553655k/s
+Elapsed time: 5.00018s
+
+Turn #19
+Player: Attacker
+Move: B3 B2
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF5 aP7  .  
+C:  .  dP3 aP1 aF9 aV9 
+D: dF9  .   .   .   .  
+E:  .   .  aV9  .  aA9 
+
+
+Heuristic score: 3
+Average recursive depth: 0
+Evals per depth:  1: 10026 2: -9948 3: 10050
+Eval perf.: 0.10126994389457125k/s
+Elapsed time: 5.00023s
+
+Turn #20
+Player: Defender
+Move: B2 C2
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF4 aP7  .  
+C:  .  dP3  .  aF9 aV9 
+D: dF9  .   .   .   .  
+E:  .   .  aV9  .  aA9 
+
+
+Heuristic score: -3
+Average recursive depth: 0
+Evals per depth:  1: 9960 2: -10005 3: 9963
+Eval perf.: 0.09444801378198214k/s
+Elapsed time: 5.000219s
+
+Turn #21
+Player: Attacker
+Move: E2 D2
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF4 aP7  .  
+C:  .  dP3  .  aF9 aV9 
+D: dF9  .  aV9  .   .  
+E:  .   .   .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10032 2: -10020 3: 10005
+Eval perf.: 0.09105515664523023k/s
+Elapsed time: 5.000095s
+
+Turn #22
+Player: Defender
+Move: B2 B3
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF3 aP6  .  
+C:  .  dP3  .  aF9 aV9 
+D: dF9  .  aV9  .   .  
+E:  .   .   .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9963 2: -10008 3: 9969
+Eval perf.: 0.08628786075525144k/s
+Elapsed time: 5.00014s
+
+Turn #23
+Player: Attacker
+Move: D2 D1
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF3 aP6  .  
+C:  .  dP3  .  aF9 aV9 
+D: dF9 aV9  .   .   .  
+E:  .   .   .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9918 2: -10068 3: 10023
+Eval perf.: 0.08226774604149278k/s
+Elapsed time: 5.000197s
+
+Turn #24
+Player: Defender
+Move: B0 A0
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF3 aP6  .  
+C:  .  dP3  .  aF9 aV9 
+D: dF9 aV9  .   .   .  
+E:  .   .   .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10017 2: -10005 3: 9924
+Eval perf.: 0.07948123710049758k/s
+Elapsed time: 5.000055s
+
+Turn #25
+Player: Attacker
+Move: D1 D0
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF3 aP6  .  
+C:  .  dP3  .  aF9 aV9 
+D: dF8 aV8  .   .   .  
+E:  .   .   .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -10020 3: 10023
+Eval perf.: 0.07702427075229529k/s
+Elapsed time: 5.000332s
+
+Turn #26
+Player: Defender
+Move: C1 D1
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF3 aP6  .  
+C:  .   .   .  aF9 aV9 
+D: dF8 aV5  .   .   .  
+E:  .   .   .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9969 2: -10014 3: 10014
+Eval perf.: 0.07383841047893033k/s
+Elapsed time: 5.000064s
+
+Turn #27
+Player: Attacker
+Move: D1 E1
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF3 aP6  .  
+C:  .   .   .  aF9 aV9 
+D: dF8  .   .   .   .  
+E:  .  aV5  .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9960 2: -10017 3: 9969
+Eval perf.: 0.07079429701370198k/s
+Elapsed time: 5.000246s
+
+Turn #28
+Player: Defender
+Move: D0 E0
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF3 aP6  .  
+C:  .   .   .  aF9 aV9 
+D:  .   .   .   .   .  
+E: dF8 aV5  .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -10011 3: 9972
+Eval perf.: 0.06876702103588828k/s
+Elapsed time: 5.000093s
+
+Turn #29
+Player: Attacker
+Move: B3 B2
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF2 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .   .   .   .   .  
+E: dF8 aV5  .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9933 2: -10041 3: 10002
+Eval perf.: 0.06595492498837188k/s
+Elapsed time: 5.000171s
+
+Turn #30
+Player: Defender
+Move: B1 B2
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF5 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .   .   .   .   .  
+E: dF8 aV5  .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9966 2: -10050 3: 10011
+Eval perf.: 0.06404037148369927k/s
+Elapsed time: 5.000051s
+
+Turn #31
+Player: Attacker
+Move: E1 E0
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF5 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .   .   .   .   .  
+E: dF7 aV4  .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9969 2: -10008 3: 9972
+Eval perf.: 0.06207672538267866k/s
+Elapsed time: 5.000069s
+
+Turn #32
+Player: Defender
+Move: A0 B0
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF5 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .   .   .   .   .  
+E: dF7 aV4  .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10008 2: -10014 3: 9972
+Eval perf.: 0.06039567713365485k/s
+Elapsed time: 5.000148s
+
+Turn #33
+Player: Attacker
+Move: E1 D1
+ 0   1   2   3   4  
+A:  .   .  dA9  .   .  
+B: dT9 dT9 dF5 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .  aV4  .   .   .  
+E: dF7  .   .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -9963 3: 9969
+Eval perf.: 0.05891936970426357k/s
+Elapsed time: 5.000192s
+
+Turn #34
+Player: Defender
+Move: B0 A0
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF5 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .  aV4  .   .   .  
+E: dF7  .   .   .  aA9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -9966 3: 9966
+Eval perf.: 0.057201690882211026k/s
+Elapsed time: 5.000307s
+
+Turn #35
+Player: Attacker
+Move: E4 D4
+ 0   1   2   3   4  
+A: dT9  .  dA9  .   .  
+B:  .  dT9 dF5 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .  aV4  .   .  aA9 
+E: dF7  .   .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -9981 3: 10014
+Eval perf.: 0.055796115660414765k/s
+Elapsed time: 5.000222s
+
+Turn #36
+Player: Defender
+Move: A2 A3
+ 0   1   2   3   4  
+A: dT9  .   .  dA9  .  
+B:  .  dT9 dF5 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .  aV4  .   .  aA9 
+E: dF7  .   .   .   .  
+
+
+Heuristic score: -3
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -9975 3: 9930
+Eval perf.: 0.05386651359049543k/s
+Elapsed time: 5.000371s
+
+Turn #37
+Player: Attacker
+Move: D4 D3
+ 0   1   2   3   4  
+A: dT9  .   .  dA9  .  
+B:  .  dT9 dF5 aP5  .  
+C:  .   .   .  aF9 aV9 
+D:  .  aV4  .  aA9  .  
+E: dF7  .   .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9981 2: -10041 3: 10023
+Eval perf.: 0.05243326312110832k/s
+Elapsed time: 5.000067s
+
+Turn #38
+Player: Defender
+Move: B2 B2
+ 0   1   2   3   4  
+A: dT9  .   .  dA7  .  
+B:  .  dT7  .  aP3  .  
+C:  .   .   .  aF7 aV9 
+D:  .  aV4  .  aA9  .  
+E: dF7  .   .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9930 2: -10029 3: 10011
+Eval perf.: 0.05082733538812101k/s
+Elapsed time: 5.000205s
+
+Turn #39
+Player: Attacker
+Move: C4 D4
+ 0   1   2   3   4  
+A: dT9  .   .  dA7  .  
+B:  .  dT7  .  aP3  .  
+C:  .   .   .  aF7  .  
+D:  .  aV4  .  aA9 aV9 
+E: dF7  .   .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9969 2: -10041 3: 10005
+Eval perf.: 0.04966168533081259k/s
+Elapsed time: 5.000175s
+
+Turn #40
+Player: Defender
+Move: E0 E1
+ 0   1   2   3   4  
+A: dT9  .   .  dA7  .  
+B:  .  dT7  .  aP3  .  
+C:  .   .   .  aF7  .  
+D:  .  aV4  .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10008 2: -10008 3: 10008
+Eval perf.: 0.04881631555990206k/s
+Elapsed time: 5.000075s
+
+Turn #41
+Player: Attacker
+Move: B3 B3
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B:  .  dT7  .   .   .  
+C:  .   .   .  aF5  .  
+D:  .  aV4  .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10008 2: -10005 3: 10032 4: -10008
+Eval perf.: 0.00012856307442041167k/s
+Elapsed time: 5.000222s
+
+Turn #42
+Player: Defender
+Move: A0 A1
+ 0   1   2   3   4  
+A:  .  dT9  .  dA5  .  
+B:  .  dT7  .   .   .  
+C:  .   .   .  aF5  .  
+D:  .  aV4  .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10032 2: -9972 3: 9972 4: -10008
+Eval perf.: 0.0001116206874545128k/s
+Elapsed time: 5.00026s
+
+Turn #43
+Player: Attacker
+Move: D4 E4
+ 0   1   2   3   4  
+A:  .  dT9  .  dA5  .  
+B:  .  dT7  .   .   .  
+C:  .   .   .  aF5  .  
+D:  .  aV4  .  aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10011 2: -10005 3: 10011 4: -10008
+Eval perf.: 4.0906498924568134e-05k/s
+Elapsed time: 5.000034s
+
+Turn #44
+Player: Defender
+Move: A1 A0
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B:  .  dT7  .   .   .  
+C:  .   .   .  aF5  .  
+D:  .  aV4  .  aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10008 2: -10014 3: 10005 4: -10011
+Eval perf.: -5.3329972122956986e-05k/s
+Elapsed time: 5.000241s
+
+Turn #45
+Player: Attacker
+Move: E4 D4
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B:  .  dT7  .   .   .  
+C:  .   .   .  aF5  .  
+D:  .  aV4  .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10041 2: -9969 3: 10011 4: -10008
+Eval perf.: 0.00032606659720694564k/s
+Elapsed time: 5.00018s
+
+Turn #46
+Player: Defender
+Move: B1 B0
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B: dT7  .   .   .   .  
+C:  .   .   .  aF5  .  
+D:  .  aV4  .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9978 2: -10008 3: 10008 4: -10008
+Eval perf.: -0.0001284361986483126k/s
+Elapsed time: 3.564648s
+
+Turn #47
+Player: Attacker
+Move: D1 C1
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B: dT7  .   .   .   .  
+C:  .  aV4  .  aF5  .  
+D:  .   .   .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 1
+Evals per depth:  1: 10005 2: -10005 3: 9975 4: -10008
+Eval perf.: -0.0001393172395606162k/s
+Elapsed time: 3.290456s
+
+Turn #48
+Player: Defender
+Move: B0 B1
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B:  .  dT7  .   .   .  
+C:  .  aV4  .  aF5  .  
+D:  .   .   .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 3
+Evals per depth:  1: 10008 2: -10014 3: 10005 4: -10032
+Eval perf.: -0.0001365352747446788k/s
+Elapsed time: 4.826317s
+
+Turn #49
+Player: Attacker
+Move: C1 C0
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B:  .  dT7  .   .   .  
+C: aV4  .   .  aF5  .  
+D:  .   .   .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9969 2: -10008 3: 10014 4: -10008
+Eval perf.: -0.0001340518518006082k/s
+Elapsed time: 4.477617s
+
+Turn #50
+Player: Defender
+Move: B1 B0
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B: dT7  .   .   .   .  
+C: aV4  .   .  aF5  .  
+D:  .   .   .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9981 2: -10032 3: 10005 4: -10032
+Eval perf.: -0.000313162371035821k/s
+Elapsed time: 2.898671s
+
+Turn #51
+Player: Attacker
+Move: C0 C1
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B: dT7  .   .   .   .  
+C:  .  aV4  .  aF5  .  
+D:  .   .   .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9972 2: -10029 3: 9975 4: -10008
+Eval perf.: -0.00035618303855341425k/s
+Elapsed time: 3.607003s
+
+Turn #52
+Player: Defender
+Move: B0 B1
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B:  .  dT7  .   .   .  
+C:  .  aV4  .  aF5  .  
+D:  .   .   .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 2
+Evals per depth:  1: 9933 2: -10044 3: 9966 4: -10032
+Eval perf.: -0.0006872428495963315k/s
+Elapsed time: 4.871806s
+
+Turn #53
+Player: Attacker
+Move: C1 C2
+ 0   1   2   3   4  
+A: dT9  .   .  dA5  .  
+B:  .  dT7  .   .   .  
+C:  .   .  aV4 aF5  .  
+D:  .   .   .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9981 2: -10029 3: 9981 4: -10008
+Eval perf.: -0.00028652815447421996k/s
+Elapsed time: 4.203503s
+
+Turn #54
+Player: Defender
+Move: A3 A4
+ 0   1   2   3   4  
+A: dT9  .   .   .  dA5 
+B:  .  dT7  .   .   .  
+C:  .   .  aV4 aF5  .  
+D:  .   .   .  aA9 aV9 
+E:  .  dF7  .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9966 2: -10050 3: 9969 4: -10014
+Eval perf.: -0.00048638742609022557k/s
+Elapsed time: 3.46629s
+
+Turn #55
+Player: Attacker
+Move: D4 E4
+ 0   1   2   3   4  
+A: dT9  .   .   .  dA5 
+B:  .  dT7  .   .   .  
+C:  .   .  aV4 aF5  .  
+D:  .   .   .  aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10041 2: -9981 3: 10008 4: -10008
+Eval perf.: 0.00022339117362708133k/s
+Elapsed time: 3.366484s
+
+Turn #56
+Player: Defender
+Move: A0 B0
+ 0   1   2   3   4  
+A:  .   .   .   .  dA5 
+B: dT9 dT7  .   .   .  
+C:  .   .  aV4 aF5  .  
+D:  .   .   .  aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10005 2: -10014 3: 10008 4: -10014
+Eval perf.: -5.5174100218014914e-05k/s
+Elapsed time: 3.279534s
+
+Turn #57
+Player: Attacker
+Move: C2 D2
+ 0   1   2   3   4  
+A:  .   .   .   .  dA5 
+B: dT9 dT7  .   .   .  
+C:  .   .   .  aF5  .  
+D:  .   .  aV4 aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9972 2: -10008 3: 10008 4: -10008
+Eval perf.: -0.00013065085355835762k/s
+Elapsed time: 3.67686s
+
+Turn #58
+Player: Defender
+Move: A4 B4
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9 dT7  .   .  dA5 
+C:  .   .   .  aF5  .  
+D:  .   .  aV4 aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 20007 2: -10014 3: 20007 4: -10008
+Eval perf.: 0.07156967226689087k/s
+Elapsed time: 3.792646s
+
+Turn #59
+Player: Attacker
+Move: D3 D2
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9 dT7  .   .  dA5 
+C:  .   .   .  aF5  .  
+D:  .   .  aV5 aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10008 2: -10008 3: 9 4: -20007
+Eval perf.: -0.07067562929397606k/s
+Elapsed time: 3.618483s
+
+Turn #60
+Player: Defender
+Move: B0 A0
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .  dT7  .   .  dA5 
+C:  .   .   .  aF5  .  
+D:  .   .  aV5 aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10005 2: -9969 3: 10008 4: -10008
+Eval perf.: 0.00012550799972999038k/s
+Elapsed time: 3.879627s
+
+Turn #61
+Player: Attacker
+Move: C3 B3
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .  dT7  .  aF5 dA5 
+C:  .   .   .   .   .  
+D:  .   .  aV5 aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10035 2: -9972 3: 10008 4: -10008
+Eval perf.: 0.00021666369264223366k/s
+Elapsed time: 3.938916s
+
+Turn #62
+Player: Defender
+Move: B4 B3
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .  dT7  .  aF4 dA4 
+C:  .   .   .   .   .  
+D:  .   .  aV5 aA9  .  
+E:  .  dF7  .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 3
+Evals per depth:  1: 9972 2: -10035 3: 9972 4: -10008
+Eval perf.: -0.00033592652549884887k/s
+Elapsed time: 3.93408s
+
+Turn #63
+Player: Attacker
+Move: E4 E3
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .  dT7  .  aF4 dA4 
+C:  .   .   .   .   .  
+D:  .   .  aV5 aA9  .  
+E:  .  dF7  .  aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10032 2: -19968 3: 12 4: -20004
+Eval perf.: -0.1002061766862307k/s
+Elapsed time: 3.956922s
+
+Turn #64
+Player: Defender
+Move: B1 B0
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B: dT7  .   .  aF4 dA4 
+C:  .   .   .   .   .  
+D:  .   .  aV5 aA9  .  
+E:  .  dF7  .  aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9981 2: -10011 3: 10008 4: -10008
+Eval perf.: -9.955816517713099e-05k/s
+Elapsed time: 2.667163s
+
+Turn #65
+Player: Attacker
+Move: D2 E2
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B: dT7  .   .  aF4 dA4 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF7 aV5 aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 2
+Evals per depth:  1: 9972 2: -10026 3: 9978 4: -20004
+Eval perf.: -0.03324825671770635k/s
+Elapsed time: 1.842403s
+
+Turn #66
+Player: Defender
+Move: B0 B1
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .  dT7  .  aF4 dA4 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF7 aV5 aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10008 2: -10008 3: 10008 4: -10008
+Eval perf.: 0.0k/s
+Elapsed time: 2.811594s
+
+Turn #67
+Player: Attacker
+Move: B3 B4
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .  dT7  .  aF3 dA3 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF7 aV5 aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 2
+Evals per depth:  1: 9978 2: -20031 3: -18 4: -109968
+Eval perf.: -0.38870137244687814k/s
+Elapsed time: 2.835239s
+
+Turn #68
+Player: Defender
+Move: B1 B2
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .  dT7 aF3 dA3 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF7 aV5 aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9966 2: 9981 3: 20001 4: -10011
+Eval perf.: 0.09583806591874512k/s
+Elapsed time: 3.550038s
+
+Turn #69
+Player: Attacker
+Move: E3 E4
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .  dT7 aF3 dA3 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF7 aV5  .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9972 2: -20028 3: 9969 4: -29997
+Eval perf.: -0.09499156859838666k/s
+Elapsed time: 4.331131s
+
+Turn #70
+Player: Defender
+Move: B2 B2
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .  aF1 dA3 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF7 aV5  .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10014 2: -9975 3: 10005 4: -10002
+Eval perf.: 0.00013212640351822655k/s
+Elapsed time: 1.175626s
+
+Turn #71
+Player: Attacker
+Move: E2 E1
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .  aF1 dA3 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF6 aV4  .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10005 2: -10005 3: 10002 4: -10005
+Eval perf.: -9.40919232863656e-06k/s
+Elapsed time: 0.959725s
+
+Turn #72
+Player: Defender
+Move: E1 E2
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .  aF1 dA3 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF5 aV3  .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 1
+Evals per depth:  1: 10002 2: -9999 3: 10002 4: -10002
+Eval perf.: 9.375309004325209e-06k/s
+Elapsed time: 1.15231s
+
+Turn #73
+Player: Attacker
+Move: B3 B3
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF5 aV3  .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 3
+Evals per depth:  1: 10002 2: -10002 3: 9978 4: -20004
+Eval perf.: -0.031266181948746447k/s
+Elapsed time: 0.676499s
+
+Turn #74
+Player: Defender
+Move: E1 E2
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .   .   .  aA9  .  
+E:  .  dF4 aV2  .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 3
+Evals per depth:  1: 3 2: -9 3: 20001 4: -10011
+Eval perf.: 0.031066308761464823k/s
+Elapsed time: 0.711141s
+
+Turn #75
+Player: Attacker
+Move: D3 D2
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .   .  aA9  .   .  
+E:  .  dF4 aV2  .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 3
+Evals per depth:  1: 10011 2: -9999 3: 10011 4: -20001
+Eval perf.: -0.030989405533476063k/s
+Elapsed time: 0.603914s
+
+Turn #76
+Player: Defender
+Move: E1 E1
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .   .  aA7  .   .  
+E:  .   .   .   .  aV9 
+
+
+Heuristic score: 0
+Average recursive depth: 1
+Evals per depth:  1: 10005 2: 18 3: 30000 4: -10002
+Eval perf.: 0.09320357836295673k/s
+Elapsed time: 0.12036s
+
+Turn #77
+Player: Attacker
+Move: E4 E3
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .   .  aA7  .   .  
+E:  .   .   .  aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10008 2: -9987 3: 6 4: -29994
+Eval perf.: -0.09299696397357754k/s
+Elapsed time: 0.134959s
+
+Turn #78
+Player: Defender
+Move: A0 B0
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9  .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .   .  aA7  .   .  
+E:  .   .   .  aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 9987 2: -10002 3: 19998 4: -10002
+Eval perf.: 0.030955073240785662k/s
+Elapsed time: 0.198705s
+
+Turn #79
+Player: Attacker
+Move: D2 D1
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9  .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .  aA7  .   .   .  
+E:  .   .   .  aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10002 2: -10002 3: 10002 4: -29994
+Eval perf.: -0.06196753372994185k/s
+Elapsed time: 0.185522s
+
+Turn #80
+Player: Defender
+Move: B0 C0
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B:  .   .   .   .  dA1 
+C: dT9  .   .   .   .  
+D:  .  aA7  .   .   .  
+E:  .   .   .  aV9  .  
+
+
+Heuristic score: 0
+Average recursive depth: 2
+Evals per depth:  1: 9999 2: -9984 3: 10002 4: -10002
+Eval perf.: 4.646705771380494e-05k/s
+Elapsed time: 0.188782s
+
+Turn #81
+Player: Attacker
+Move: E3 E2
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B:  .   .   .   .  dA1 
+C: dT9  .   .   .   .  
+D:  .  aA7  .   .   .  
+E:  .   .  aV9  .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10002 2: -10002 3: 10002 4: -10002
+Eval perf.: 0.0k/s
+Elapsed time: 0.174606s
+
+Turn #82
+Player: Defender
+Move: C0 B0
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9  .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .  aA7  .   .   .  
+E:  .   .  aV9  .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 2
+Evals per depth:  1: 9984 2: -10008 3: 9984 4: -10002
+Eval perf.: -0.00012995905015083847k/s
+Elapsed time: 0.194783s
+
+Turn #83
+Player: Attacker
+Move: E2 D2
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9  .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .  aA7 aV9  .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 0
+Evals per depth:  1: 10002 2: -10002 3: 6 4: -29994
+Eval perf.: -0.09273201427516402k/s
+Elapsed time: 0.20474s
+
+Turn #84
+Player: Defender
+Move: B0 A0
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .   .   .   .  
+D:  .  aA7 aV9  .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: 0
+Average recursive depth: 2
+Evals per depth:  1: 10002 2: -10002 3: 10002 4: -10002
+Eval perf.: 0.0k/s
+Elapsed time: 0.165805s
+
+Turn #85
+Player: Attacker
+Move: D2 C2
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .  aV9  .   .  
+D:  .  aA7  .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: -9996
+Average recursive depth: 2
+Evals per depth:  1: 9981 2: -10005 3: -21 4: -49992
+Eval perf.: -0.1545713444108732k/s
+Elapsed time: 0.165325s
+
+Turn #86
+Player: Defender
+Move: A0 B0
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9  .   .   .  dA1 
+C:  .   .  aV9  .   .  
+D:  .  aA7  .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: 9996
+Average recursive depth: 1
+Evals per depth:  1: 9984 2: -10002 3: 10002 4: -6
+Eval perf.: 0.030800540021318174k/s
+Elapsed time: 0.240765s
+
+Turn #87
+Player: Attacker
+Move: C2 C3
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9  .   .   .  dA1 
+C:  .   .   .  aV9  .  
+D:  .  aA7  .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: -9999
+Average recursive depth: 2
+Evals per depth:  1: -9996 2: -59997 3: -39990 4: -59997
+Eval perf.: -0.5243607312967107k/s
+Elapsed time: 0.210792s
+
+Turn #88
+Player: Defender
+Move: B0 A0
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .   .  aV9  .  
+D:  .  aA7  .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: 9999
+Average recursive depth: 1
+Evals per depth:  1: 10005 2: -9978 3: 19998 4: 39987
+Eval perf.: 0.18503667726519532k/s
+Elapsed time: 0.158739s
+
+Turn #89
+Player: Attacker
+Move: C3 C4
+ 0   1   2   3   4  
+A: dT9  .   .   .   .  
+B:  .   .   .   .  dA1 
+C:  .   .   .   .  aV9 
+D:  .  aA7  .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: -9999
+Average recursive depth: 2
+Evals per depth:  1: 10002 2: -20001 3: -39990 4: -49998
+Eval perf.: -0.30822674846082904k/s
+Elapsed time: 0.069409s
+
+Turn #90
+Player: Defender
+Move: A0 B0
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9  .   .   .  dA1 
+C:  .   .   .   .  aV9 
+D:  .  aA7  .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: 9999
+Average recursive depth: 2
+Evals per depth:  1: 10002 2: 9996 3: 59997 4: 39990
+Eval perf.: 0.36974413154493124k/s
+Elapsed time: 0.113894s
+
+Turn #91
+Player: Attacker
+Move: D1 D0
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B: dT9  .   .   .  dA1 
+C:  .   .   .   .  aV9 
+D: aA7  .   .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: -9999
+Average recursive depth: 3
+Evals per depth:  1: 3 2: -59985 3: -29991 4: -59997
+Eval perf.: -0.46204286158767405k/s
+Elapsed time: 0.072084s
+
+Turn #92
+Player: Defender
+Move: B0 B1
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B:  .  dT9  .   .  dA1 
+C:  .   .   .   .  aV9 
+D: aA7  .   .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: 9999
+Average recursive depth: 2
+Evals per depth:  1: 10002 2: -3 3: 69984 4: 29991
+Eval perf.: 0.3387036769232471k/s
+Elapsed time: 0.110618s
+
+Turn #93
+Player: Attacker
+Move: D0 C0
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B:  .  dT9  .   .  dA1 
+C: aA7  .   .   .  aV9 
+D:  .   .   .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: -9999
+Average recursive depth: 0
+Evals per depth:  1: 3 2: -59985 3: -29991 4: -69996
+Eval perf.: -0.49251993412771766k/s
+Elapsed time: 0.106111s
+
+Turn #94
+Player: Defender
+Move: B1 B2
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B:  .   .  dT9  .  dA1 
+C: aA7  .   .   .  aV9 
+D:  .   .   .   .   .  
+E:  .   .   .   .   .  
+
+
+Heuristic score: 9999
+Average recursive depth: 3
+Evals per depth:  1: 20001 2: -3 3: 69984 4: 29991
+Eval perf.: 0.36925224863825573k/s
+Elapsed time: 0.110968s
+
+Turn #95
+Player: Attacker
+Move: C4 B4
+ 0   1   2   3   4  
+A:  .   .   .   .   .  
+B:  .   .  dT9  .   .  
+C: aA7  .   .   .  aV6 
+D:  .   .   .   .   .  
+E:  .   .   .   .   .  
+
+
+
+Attacker wins in 95 turns!

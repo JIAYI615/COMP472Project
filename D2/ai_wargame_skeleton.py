@@ -676,15 +676,22 @@ class Game:
         (score, move, avg_depth) = self.miniMax(self.clone(), self.options.max_depth, self.next_player.value,start_time)
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
+        f.write("Heuristic score: " + str(score)+'\n')
+        f.write("Average recursive depth: " +str(avg_depth)+'\n')
+        f.write("Evals per depth: ")
         print(f"Heuristic score: {score}")
         print(f"Average recursive depth: {avg_depth:0.1f}")
         print(f"Evals per depth: ",end='')
         for k in sorted(self.stats.evaluations_per_depth.keys()):
+            # python3 ai_wargame_skeleton.py --game_type defender
+            f.write(" "+str(k)+": "+str(self.stats.evaluations_per_depth[k]))
             print(f"{k}:{self.stats.evaluations_per_depth[k]} ",end='')
         print()
         total_evals = sum(self.stats.evaluations_per_depth.values())
         if self.stats.total_seconds > 0:
+            f.write('\n'+"Eval perf.: " + str(total_evals/self.stats.total_seconds/1000) +"k/s"+'\n')
             print(f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
+        f.write("Elapsed time: " +str(elapsed_seconds) +"s"+'\n\n')
         print(f"Elapsed time: {elapsed_seconds:0.1f}s")
         return move
     
@@ -883,6 +890,7 @@ def main():
     playerOne = 'H' if game_type == GameType.AttackerVsComp or game_type == GameType.AttackerVsDefender else 'AI'
     playerTwo = 'H\n\n' if game_type == GameType.CompVsDefender or game_type == GameType.AttackerVsDefender else 'AI\n\n'
 
+    global f 
     f = open(f'gameTrace-{str(args.alpha_beta).lower()}-{str(options.max_time)}-{str(options.max_turns)}.txt', 'w')
     f.write('Game Parameters:\n- game timeout (seconds): ' + str(options.max_time) +
             '\n- max turns: ' + str(options.max_turns) +
