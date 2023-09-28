@@ -673,12 +673,20 @@ class Game:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
         start_time = datetime.now()
         # (score, move, avg_depth) = self.random_move()
-        (score, move, avg_depth) = self.miniMax(self.clone(), self.options.max_depth, self.next_player.value,start_time)
+        # python3 ai_wargame_skeleton.py --game_type defender
+        # self.options.max_depth
+        i = 0
+        while i <= self.options.max_depth:
+            self.stats.evaluations_per_depth[i] = 0
+            i +=1
+        (score, move, avg_depth) = self.miniMax(self.clone(), 2, self.next_player.value,start_time)
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
+        f.write("This is for : " + str(self.next_player.name))
         f.write("Heuristic score: " + str(score)+'\n')
         f.write("Average recursive depth: " +str(avg_depth)+'\n')
         f.write("Evals per depth: ")
+        print("THIS IS FOR : " + str(self.next_player.name) +'\n')
         print(f"Heuristic score: {score}")
         print(f"Average recursive depth: {avg_depth:0.1f}")
         print(f"Evals per depth: ",end='')
@@ -697,10 +705,12 @@ class Game:
     
     def miniMax(self, game : Game, depth : int, playerValue : int, start_time)-> Tuple[int, CoordPair | None, float]:
         #if reach the end of the adversarial tree or find a goal state no matter who wins, no need to generate children, want to save time
-        if depth < 1 or game.has_winner():
+        if depth < 1 or game.is_finished():
             # print(str(playerValue))
             # print("leaf: " + str(game.evaluate0(playerValue)))
+            self.stats.evaluations_per_depth[depth] += game.evaluate0(playerValue)
             return (game.evaluate0(playerValue), None, depth)
+        
         
         #not sure if this one is needed because there's destroy feature
         #the depth is no 0 and it's not a goal state, but no more move can be made
@@ -710,12 +720,15 @@ class Game:
         
         #this is the Max layer
         if depth %2 == 0:
+            # print("-----------------")
+            # print(str(depth))
             best_score = MIN_HEURISTIC_SCORE
             depth_evaluation_score = 0
             best_move = None
             avg_depth = 0
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
+            newGame= game.clone()
             for i in random_move_candidates:
             # for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:
@@ -750,6 +763,7 @@ class Game:
             avg_depth = 0
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
+            newGame = game.clone()
             for i in random_move_candidates:
             # for i in game.move_candidates():
                 #if AI exceed the time
