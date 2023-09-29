@@ -676,16 +676,17 @@ class Game:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
         start_time = datetime.now()
         # (score, move, avg_depth) = self.random_move()
-        # python3 ai_wargame_skeleton.py --game_type auto
+        # python3 ai_wargame_skeleton.py --game_type auto --max_depth 2
         # self.options.max_depth
         i = 0
         while i <= self.options.max_depth:
             self.stats.evaluations_per_depth[i] = 0
             i +=1
+        self.stats.evaluations_per_depth[0]=1
         self.stats.evaluations_depth["leavesNum"] = 0
         self.stats.evaluations_depth["totalDepth"] = 0
 
-        (score, move, avg_depth) = self.miniMax(self.clone(), self.options.max_depth, self.next_player.value,start_time, True)
+        (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
         f.write("This is for : " + str(self.next_player.name)+'\n')
@@ -698,7 +699,7 @@ class Game:
         print(f"Evals per depth: ",end='')
         
         for k in sorted(self.stats.evaluations_per_depth.keys()):
-            # python3 ai_wargame_skeleton.py --game_type auto
+            # c --max_depth 2
             f.write(" "+str(k)+": "+str(self.stats.evaluations_per_depth[k]))
             print(f"{k}:{self.stats.evaluations_per_depth[k]} ",end='')
         print()
@@ -711,13 +712,14 @@ class Game:
         print("Cumulative % evals by depth: " )
         for k in sorted(self.stats.evaluations_per_depth.keys()):
             f.write(" "+str(self.stats.evaluations_per_depth[k]/total_evals))
-            print(f"{k}:{self.stats.evaluations_per_depth[k]/total_evals*100:.6f}%   ",end='')
+            print(f"{k}:{self.stats.evaluations_per_depth[k]/total_evals*100:.6f}%  ",end='')
         
-        averageBranchingFactor = total_evals/self.stats.evaluations_depth["leavesNum"]
+        averageBranchingFactor = total_evals/(total_evals-self.stats.evaluations_depth["leavesNum"]+1)
         f.write('\n'+"Average branching factor:: " + str(averageBranchingFactor) +'\n')
         print()
         print("Average branching factor:: " + str(averageBranchingFactor))
-        print("Total leaf NUmber"+ str(self.stats.evaluations_depth["leavesNum"]))
+        f.write("Total leaf Number: " + str(self.stats.evaluations_depth["leavesNum"])+'\n')
+        print("Total leaf NUmber: "+ str(self.stats.evaluations_depth["leavesNum"]))
         
         if self.stats.total_seconds > 0:
             f.write('\n'+"Eval perf.: " + str(total_evals/self.stats.total_seconds/1000) +"k/s"+'\n')
@@ -729,12 +731,12 @@ class Game:
     
     def miniMax(self, game : Game, depth : int, playerValue : int, start_time, isMax:bool)-> Tuple[int, CoordPair | None, float]:
         #if reach the end of the adversarial tree or find a goal state no matter who wins, no need to generate children, want to save time
-        if depth < 1 or game.is_finished():
+        if depth == self.options.max_depth or game.is_finished():
             # print(str(playerValue))
             # print("leaf: " + str(game.evaluate0(playerValue)))
-            self.stats.evaluations_per_depth[depth] += 1
+            # self.stats.evaluations_per_depth[depth] += 1
             self.stats.evaluations_depth["leavesNum"] +=1
-            self.stats.evaluations_depth["totalDepth"] += (4-depth)
+            self.stats.evaluations_depth["totalDepth"] += (depth)
             avg_depth = self.stats.evaluations_depth["totalDepth"]/self.stats.evaluations_depth["leavesNum"]
             return (game.evaluate0(playerValue), None, avg_depth)
         
@@ -760,8 +762,8 @@ class Game:
                 # print(str(newGame.get(i.src).health))
                 newGame.perform_move(i)
                 newGame.next_turn()
-                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue,start_time, False)
-                newGame.stats.evaluations_per_depth[depth] += 1
+                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth+1, playerValue,start_time, False)
+                newGame.stats.evaluations_per_depth[depth+1] += 1
                 # print(str(eval))
                 #update the max value
                 # print("max layer "+str(eval))
@@ -792,8 +794,8 @@ class Game:
                 # print("( " + str(i.src.row) + " , " + str(i.src.col)+" )" + " to " + "( " + str(i.dst.row) + " , " + str(i.dst.col)+" )")
                 newGame.perform_move(i)
                 newGame.next_turn()
-                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth-1, playerValue,start_time, True)
-                newGame.stats.evaluations_per_depth[depth] += 1
+                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth+1, playerValue,start_time, True)
+                newGame.stats.evaluations_per_depth[depth+1] += 1
                 #update the best value
                 # print("Min layer " + str(eval))
                 if eval < best_score:
