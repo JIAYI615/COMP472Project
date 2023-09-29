@@ -648,6 +648,8 @@ class Game:
                 return Player.Attacker    
         elif self._defender_has_ai:
             return Player.Defender
+        else:
+            return Player.Defender
 
     def move_candidates(self) -> Iterable[CoordPair]:
         """Generate valid move candidates for the next player."""
@@ -702,7 +704,7 @@ class Game:
         print()
         
         total_evals = sum(self.stats.evaluations_per_depth.values())
-        f.write("Cumulative evals: " + str(total_evals) +'\n')
+        f.write('\n'+"Cumulative evals: " + str(total_evals) +'\n')
         print("Cumulative evals: " + str(total_evals))
         
         f.write("Cumulative % evals by depth: " +'\n')
@@ -712,9 +714,10 @@ class Game:
             print(f"{k}:{self.stats.evaluations_per_depth[k]/total_evals*100:.6f}%   ",end='')
         
         averageBranchingFactor = total_evals/self.stats.evaluations_depth["leavesNum"]
-        f.write("Average branching factor:: " + str(averageBranchingFactor) +'\n')
+        f.write('\n'+"Average branching factor:: " + str(averageBranchingFactor) +'\n')
         print()
         print("Average branching factor:: " + str(averageBranchingFactor))
+        print("Total leaf NUmber"+ str(self.stats.evaluations_depth["leavesNum"]))
         
         if self.stats.total_seconds > 0:
             f.write('\n'+"Eval perf.: " + str(total_evals/self.stats.total_seconds/1000) +"k/s"+'\n')
