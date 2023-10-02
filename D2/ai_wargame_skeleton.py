@@ -677,7 +677,6 @@ class Game:
         start_time = datetime.now()
         # (score, move, avg_depth) = self.random_move()
         # python3 ai_wargame_skeleton.py --game_type auto --max_depth 2
-        # self.options.max_depth
         i = 0
         while i <= self.options.max_depth:
             self.stats.evaluations_per_depth[i] = 0
@@ -699,7 +698,6 @@ class Game:
         print(f"Evals per depth: ",end='')
         
         for k in sorted(self.stats.evaluations_per_depth.keys()):
-            # c --max_depth 2
             f.write(" "+str(k)+": "+str(self.stats.evaluations_per_depth[k]))
             print(f"{k}:{self.stats.evaluations_per_depth[k]} ",end='')
         print()
@@ -711,7 +709,7 @@ class Game:
         f.write("Cumulative % evals by depth: " +'\n')
         print("Cumulative % evals by depth: " )
         for k in sorted(self.stats.evaluations_per_depth.keys()):
-            f.write(" "+str(self.stats.evaluations_per_depth[k]/total_evals))
+            f.write(" "+str(k)+": "+str(self.stats.evaluations_per_depth[k]/total_evals))
             print(f"{k}:{self.stats.evaluations_per_depth[k]/total_evals*100:.6f}%  ",end='')
         
         averageBranchingFactor = total_evals/(total_evals-self.stats.evaluations_depth["leavesNum"]+1)
@@ -732,9 +730,6 @@ class Game:
     def miniMax(self, game : Game, depth : int, playerValue : int, start_time, isMax:bool)-> Tuple[int, CoordPair | None, float]:
         #if reach the end of the adversarial tree or find a goal state no matter who wins, no need to generate children, want to save time
         if depth == self.options.max_depth or game.is_finished():
-            # print(str(playerValue))
-            # print("leaf: " + str(game.evaluate0(playerValue)))
-            # self.stats.evaluations_per_depth[depth] += 1
             self.stats.evaluations_depth["leavesNum"] +=1
             self.stats.evaluations_depth["totalDepth"] += (depth)
             avg_depth = self.stats.evaluations_depth["totalDepth"]/self.stats.evaluations_depth["leavesNum"]
@@ -742,8 +737,6 @@ class Game:
         
         #this is the Max layer
         if isMax:
-            # print("-----------------")
-            # print(str(depth))
             best_score = MIN_HEURISTIC_SCORE
             best_move = None
             avg_depth = 0
@@ -752,27 +745,17 @@ class Game:
             newGame= game.clone()
             for i in random_move_candidates:
             # for i in game.move_candidates():
-                if (datetime.now() - start_time).total_seconds() > self.options.max_time:
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
-                # print(depth)
-                # print(str(game.next_player.name))
                 newGame = game.clone()
-                # print(str(newGame.next_player.name))
-                # print("( " + str(i.src.row) + " , " + str(i.src.col)+" )" + " to " + "( " + str(i.dst.row) + " , " + str(i.dst.col)+" )")
-                # print(str(newGame.get(i.src).health))
                 newGame.perform_move(i)
                 newGame.next_turn()
-                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth+1, playerValue,start_time, False)
                 newGame.stats.evaluations_per_depth[depth+1] += 1
-                # print(str(eval))
-                #update the max value
-                # print("max layer "+str(eval))
-                if eval > best_score:
+                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth+1, playerValue,start_time, False)
+                if eval > best_score:   #update the max value
                     best_score = max(eval, best_score)
                     best_move = i
-            #return the max value
-            return (best_score, best_move, avg_depth)
-
+            return (best_score, best_move, avg_depth)   #return the max value
         
         #this is the min layer
         else:
@@ -784,25 +767,17 @@ class Game:
             newGame = game.clone()
             for i in random_move_candidates:
             # for i in game.move_candidates():
-                #if AI exceed the time
-                if (datetime.now() - start_time).total_seconds() > self.options.max_time:
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
-                # print(depth)
-                # print(str(game.next_player.name))
                 newGame = game.clone()
-                # print(str(newGame.next_player.name))
-                # print("( " + str(i.src.row) + " , " + str(i.src.col)+" )" + " to " + "( " + str(i.dst.row) + " , " + str(i.dst.col)+" )")
                 newGame.perform_move(i)
                 newGame.next_turn()
-                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth+1, playerValue,start_time, True)
                 newGame.stats.evaluations_per_depth[depth+1] += 1
-                #update the best value
-                # print("Min layer " + str(eval))
-                if eval < best_score:
+                (eval, move, avg_depth) = self.miniMax(newGame.clone(), depth+1, playerValue,start_time, True)
+                if eval < best_score:   #update the best value
                     best_score = min(eval, best_score)
-                    best_move = i
-            #return the max value
-            return (best_score, best_move, avg_depth)
+                    best_move = i           
+            return (best_score, best_move, avg_depth)   #return the min value
     
     def evaluate0(self, player : int) -> float:
         attacker_num = 0
@@ -820,7 +795,7 @@ class Game:
         #attacker's value is 0, defender's value is 1
         if player == 0:
             return attacker_num-defender_num
-        else:
+        if player == 1:
             return defender_num-attacker_num
 
 
