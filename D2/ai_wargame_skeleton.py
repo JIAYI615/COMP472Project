@@ -797,6 +797,77 @@ class Game:
             return attacker_num-defender_num
         if player == 1:
             return defender_num-attacker_num
+        
+    #function to get the player's ai position, will be used in evaluation1
+    def get_ai_position(self,player:Player)-> Tuple[Coord,Unit]:
+        for i in self.player_units(player):
+            if i[1].type.name == "AI":
+                return i
+    
+    def evaluate1(self, player : int) -> float: #evaluate the state by calculating the distance
+        if (not self._attacker_has_ai) and (not self._defender_has_ai): #when the AIs are destroyed at the same time
+            if player == 0: #if it's attacker, attacker loses
+                return -9999
+            if player == 1: #if it's defender, defender wins
+                return 9999
+            
+        if (not self._attacker_has_ai) and self._defender_has_ai: #defender has AI and attacker doesn't
+            if player == 0: #if it's attacker, attacker loses
+                return -9999
+            if player == 1: #if it's defender, defender wins
+                return 9999
+            
+        if self._attacker_has_ai and (not self._defender_has_ai): #attacker has ai and defender doesn't
+            if player == 0: #if it's attacker, attacker wins
+                return 9999
+            if player == 1: #if it's defender, defender loses
+                return -9999
+            
+        #So both the attacker and the defender have ai, calculate the position numbers:
+        attacker_attack_position = 0 #how far are attacker's virus and programs away from defender's ai
+        attacker_defend_position = 0 #how far is attacker's firewall away from its own ai
+        defender_attack_position = 0 #how far are defender's programs away from attacker's ai
+        defender_defend_position = 0 #how far is defender's firewall away from its own ai
+        attacker_ai = self.get_ai_position(Player.Attacker)[0] #get the attacker ai coord
+        defender_ai = self.get_ai_position(Player.Defender)[0] #get the defender ai coord
+        tech_turn =0 
+        
+        for i in self.player_units(Player.Attacker):
+            if i[1].type.name == "Virus":
+                attacker_attack_position += -61
+                attacker_attack_position += 6*(abs(i[0].row - defender_ai.row) + abs(i[0].col - defender_ai.col))
+                
+            elif i[1].type.name == "Program":
+                attacker_attack_position += -31
+                attacker_attack_position += 3*(abs(i[0].row - defender_ai.row) + abs(i[0].col - defender_ai.col))
+                
+            elif i[1].type.name == "Firewall":
+                attacker_defend_position += -11
+                attacker_defend_position += abs(i[0].row -attacker_ai.row) + abs(i[0].col - attacker_ai.col)
+        
+        for i in self.player_units(Player.Defender):
+            if i[1].type.name == "Firewall":
+                defender_defend_position += -101
+                defender_defend_position += 10*(abs(i[0].row - defender_ai.row) + abs(i[0].col - defender_ai.col))
+
+            elif i[1].type.name == "Tech":
+                if tech_turn == 0:
+                    defender_defend_position += -31
+                    defender_defend_position += 3*(abs(i[0].row - defender_ai.row) + abs(i[0].col - defender_ai.col))
+                    tech_turn +=1
+                else:
+                    defender_attack_position += -31
+                    defender_attack_position += 3*(abs(i[0].row -attacker_ai.row) + abs(i[0].col - attacker_ai.col))
+            elif i[1].type.name == "Program":
+                defender_attack_position += -31
+                defender_attack_position += 3*(abs(i[0].row -attacker_ai.row) + abs(i[0].col - attacker_ai.col))
+            
+        if player == 0: #the bigger the better
+            return (defender_attack_position+defender_defend_position)-(attacker_attack_position+attacker_defend_position)
+        if player == 1:
+            return (attacker_attack_position+attacker_defend_position)-(defender_attack_position+defender_defend_position)
+
+
 
 
     def post_move_to_broker(self, move: CoordPair):
