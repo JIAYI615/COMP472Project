@@ -809,6 +809,11 @@ class Game:
             if i[1].type.name == "AI":
                 return i
     
+    '''
+    The evaluate function 1 is designed based on the distance between units and the ai. It's is assumed that
+    each players want to make units which are good at attacking as close as possible to the other player's ai
+    and place the units which are good at defending as close as possible to their own ai.
+    '''
     def evaluate1(self, player : int) -> float: #evaluate the state by calculating the distance
         if (not self._attacker_has_ai) and (not self._defender_has_ai): #when the AIs are destroyed at the same time
             if player == 0: #if it's attacker, attacker loses
