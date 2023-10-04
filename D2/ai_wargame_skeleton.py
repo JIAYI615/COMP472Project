@@ -226,6 +226,7 @@ class Options:
     max_turns : int | None = 100
     randomize_moves : bool = True
     broker : str | None = None
+    evaluation: int | None = 0
 
 ##############################################################################################################
 
@@ -733,7 +734,11 @@ class Game:
             self.stats.evaluations_depth["leavesNum"] +=1
             self.stats.evaluations_depth["totalDepth"] += (depth)
             avg_depth = self.stats.evaluations_depth["totalDepth"]/self.stats.evaluations_depth["leavesNum"]
-            return (game.evaluate0(playerValue), None, avg_depth)
+            if self.options.evaluation == 0:
+                evaluation_score = game.evaluate0(playerValue)
+            elif self.options.evaluation == 1:
+                evaluation_score = game.evaluate1(playerValue)
+            return (evaluation_score, None, avg_depth)
         
         #this is the Max layer
         if isMax:
