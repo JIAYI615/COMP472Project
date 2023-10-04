@@ -677,7 +677,7 @@ class Game:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
         start_time = datetime.now()
         # (score, move, avg_depth) = self.random_move()
-        # python3 ai_wargame_skeleton.py --game_type auto --max_depth 2
+        # python3 ai_wargame_skeleton.py --game_type auto --max_depth 2 --alpha_beta true
         i = 0
         while i <= self.options.max_depth:
             self.stats.evaluations_per_depth[i] = 0
@@ -976,15 +976,18 @@ def main():
     playerOne = 'H' if game_type == GameType.AttackerVsComp or game_type == GameType.AttackerVsDefender else 'AI'
     playerTwo = 'H\n\n' if game_type == GameType.CompVsDefender or game_type == GameType.AttackerVsDefender else 'AI\n\n'
 
+    game = Game(options=options)
+    
     global f 
     f = open(f'gameTrace-{str(args.alpha_beta).lower()}-{str(options.max_time)}-{str(options.max_turns)}.txt', 'w')
     f.write('Game Parameters:\n- game timeout (seconds): ' + str(options.max_time) +
             '\n- max turns: ' + str(options.max_turns) +
+            '\n- Evaluation function used : e' + str(game.options.evaluation)+
             '\n- Player 1 : ' + playerOne +
             '\n- Player 2 : ' + playerTwo)
 
     # create a new game
-    game = Game(options=options)
+    
 
     f.write('Initial board configuration:\n\n' + Game.print_board(game) + '\n\n\n')
 
