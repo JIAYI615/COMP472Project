@@ -1010,6 +1010,7 @@ def main():
 
      # create a new game
     game = Game(options=options)
+    # game.options.evaluation = 2
     
     global f 
     f = open(f'gameTrace-{str(args.alpha_beta).lower()}-{str(options.max_time)}-{str(options.max_turns)}.txt', 'w')
