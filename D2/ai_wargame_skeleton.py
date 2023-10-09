@@ -686,7 +686,12 @@ class Game:
         self.stats.evaluations_depth["leavesNum"] = 0
         self.stats.evaluations_depth["totalDepth"] = 0
 
-        (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
+        # (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
+        #need to be changed when alphaBeta is added
+        if self.options.alpha_beta:
+            (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True, MIN_HEURISTIC_SCORE, MAX_HEURISTIC_SCORE)
+        else:
+            (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
         f.write("This is for : " + str(self.next_player.name)+'\n')
@@ -738,6 +743,8 @@ class Game:
                 evaluation_score = game.evaluate0(playerValue)
             elif self.options.evaluation == 1:
                 evaluation_score = game.evaluate1(playerValue)
+            elif self.options.evaluation == 2:
+                evaluation_score = game.evaluate2(playerValue)
             return (evaluation_score, None, avg_depth)
         
         #this is the Max layer
@@ -877,7 +884,32 @@ class Game:
         if player == 1:
             return (attacker_attack_position+attacker_defend_position)-(defender_attack_position+defender_defend_position)
 
-
+    '''
+    The evaluate function 1 is designed based on the the health value of the units. 
+    Except for ai, virus and Tech are considered to have higher value than other units
+    '''
+    def evaluate2(self, player : int) -> float:
+        attacker_num = 0
+        defender_num = 0
+        for i in self.player_units(Player.Attacker):
+            if i[1].type.name == "AI":
+                attacker_num = attacker_num + 9999
+            elif i[1].type.name == "Virus":
+                attacker_num = attacker_num + 9
+            else:
+                attacker_num = attacker_num + 3
+        for i in self.player_units(Player.Defender):
+            if i[1].type.name == "AI":
+                defender_num  = defender_num  + 9999
+            elif i[1].type.name == "Tech":
+                defender_num  = defender_num  + 9
+            else:
+                defender_num  = defender_num  + 3
+        #attacker's value is 0, defender's value is 1
+        if player == 0:
+            return attacker_num-defender_num
+        if player == 1:
+            return defender_num-attacker_num
 
 
     def post_move_to_broker(self, move: CoordPair):
@@ -976,6 +1008,7 @@ def main():
     playerOne = 'H' if game_type == GameType.AttackerVsComp or game_type == GameType.AttackerVsDefender else 'AI'
     playerTwo = 'H\n\n' if game_type == GameType.CompVsDefender or game_type == GameType.AttackerVsDefender else 'AI\n\n'
 
+     # create a new game
     game = Game(options=options)
     
     global f 
@@ -986,7 +1019,7 @@ def main():
             '\n- Player 1 : ' + playerOne +
             '\n- Player 2 : ' + playerTwo)
 
-    # create a new game
+   
     
 
     f.write('Initial board configuration:\n\n' + Game.print_board(game) + '\n\n\n')
