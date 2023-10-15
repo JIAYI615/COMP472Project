@@ -689,9 +689,9 @@ class Game:
         # (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
         #need to be changed when alphaBeta is added
         if self.options.alpha_beta:
-            (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True, MIN_HEURISTIC_SCORE, MAX_HEURISTIC_SCORE)
+            (score, move, avg_depth) = self.alphaBeta(self.clone(), 0, self.next_player.value,start_time, self.next_player == Player.Attacker, MIN_HEURISTIC_SCORE, MAX_HEURISTIC_SCORE)
         else:
-            (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
+            (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, self.next_player == Player.Attacker)
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
         f.write("This is for : " + str(self.next_player.name)+'\n')
@@ -790,6 +790,71 @@ class Game:
                     best_score = min(eval, best_score)
                     best_move = i           
             return (best_score, best_move, avg_depth)   #return the min value
+        
+    def alphaBeta(self, game : Game, depth : int, playerValue : int, start_time, isMax:bool, alpha: int, beta : int)-> Tuple[int, CoordPair | None, float]:
+        if depth == self.options.max_depth or game.is_finished():
+            self.stats.evaluations_depth["leavesNum"] +=1
+            self.stats.evaluations_depth["totalDepth"] += (depth)
+            avg_depth = self.stats.evaluations_depth["totalDepth"]/self.stats.evaluations_depth["leavesNum"]
+            if self.options.evaluation == 0:
+                evaluation_score = game.evaluate0(playerValue)
+            elif self.options.evaluation == 1:
+                evaluation_score = game.evaluate1(playerValue)
+            elif self.options.evaluation == 2:
+                evaluation_score = game.evaluate2(playerValue)
+            return (evaluation_score, None, avg_depth)
+        if isMax:
+            best_score = MIN_HEURISTIC_SCORE
+            best_move = None
+            avg_depth = 0
+            random_move_candidates = list(game.move_candidates())
+            random.shuffle(random_move_candidates)
+            newGame= game.clone()
+            for i in random_move_candidates:
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
+                    return (best_score, best_move, avg_depth)
+                newGame = game.clone()
+                newGame.perform_move(i)
+                newGame.next_turn()
+                newGame.stats.evaluations_per_depth[depth+1] += 1
+                (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue ,start_time, False, alpha, beta)
+                print('max:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
+                temp_score = min(best_score, eval)
+                temp_beta = min(beta, temp_score)
+                if (beta <= alpha):
+                    print('break max')
+                    break
+                best_move = i
+                beta = temp_beta
+                best_score = temp_score
+            return (best_score, best_move, avg_depth)   #return the max value
+        else:
+            best_score = MAX_HEURISTIC_SCORE
+            best_move = None
+            avg_depth = 0
+            random_move_candidates = list(game.move_candidates())
+            random.shuffle(random_move_candidates)
+            newGame = game.clone()
+            for i in random_move_candidates:
+            # for i in game.move_candidates():
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
+                    return (best_score, best_move, avg_depth)
+                newGame = game.clone()
+                newGame.perform_move(i)
+                newGame.next_turn()
+                newGame.stats.evaluations_per_depth[depth+1] += 1
+                (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue,start_time, True, alpha, beta)
+                print('min:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
+                temp_score = min(best_score, eval)
+                temp_beta = min(beta, temp_score)
+                if (beta <= alpha):
+                    print('break min')
+                    break
+                best_move = i
+                beta = temp_beta
+                best_score = temp_score     
+            return (best_score, best_move, avg_depth)   #return the min value
+
     
     def evaluate0(self, player : int) -> float:
         attacker_num = 0
@@ -1003,6 +1068,8 @@ def main():
         options.max_turns = args.max_turns
     if args.broker is not None:
         options.broker = args.broker
+    if args.alpha_beta is not None:
+        options.alpha_beta = args.alpha_beta
 
     
     playerOne = 'H' if game_type == GameType.AttackerVsComp or game_type == GameType.AttackerVsDefender else 'AI'
@@ -1011,6 +1078,7 @@ def main():
      # create a new game
     game = Game(options=options)
     # game.options.evaluation = 2
+
     
     global f 
     f = open(f'gameTrace-{str(args.alpha_beta).lower()}-{str(options.max_time)}-{str(options.max_turns)}.txt', 'w')
