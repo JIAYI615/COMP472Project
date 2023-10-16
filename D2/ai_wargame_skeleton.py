@@ -819,15 +819,12 @@ class Game:
                 newGame.next_turn()
                 newGame.stats.evaluations_per_depth[depth+1] += 1
                 (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue ,start_time, False, alpha, beta)
-                print('max:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
-                temp_score = max(best_score, eval)
-                temp_alpha = max(alpha, temp_score)
-                if (beta <= temp_alpha):
-                    print('break max')
+                best_score = max(best_score, eval)
+                alpha = max(alpha, best_score)
+                if (beta <= alpha):
                     break
-                best_move = i
-                alpha = temp_alpha
-                best_score = temp_score
+                if(best_score == eval):
+                    best_move = i
             return (best_score, best_move, avg_depth)   #return the max value
         else:
             best_score = MAX_HEURISTIC_SCORE
@@ -845,15 +842,12 @@ class Game:
                 newGame.next_turn()
                 newGame.stats.evaluations_per_depth[depth+1] += 1
                 (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue,start_time, True, alpha, beta)
-                print('min:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
-                temp_score = min(best_score, eval)
-                temp_beta = min(beta, temp_score)
-                if (temp_beta <= alpha):
-                    print('break min')
+                best_score = min(best_score, eval)
+                beta = min(beta, best_score)
+                if (beta <= alpha):
                     break
-                best_move = i
-                beta = temp_beta
-                best_score = temp_score     
+                if(best_score == eval):
+                    best_move = i
             return (best_score, best_move, avg_depth)   #return the min value
 
     
