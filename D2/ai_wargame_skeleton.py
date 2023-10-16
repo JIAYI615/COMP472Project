@@ -756,8 +756,8 @@ class Game:
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
             newGame= game.clone()
-            for i in random_move_candidates:
-            # for i in game.move_candidates():
+            # for i in random_move_candidates:
+            for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
@@ -778,8 +778,8 @@ class Game:
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
             newGame = game.clone()
-            for i in random_move_candidates:
-            # for i in game.move_candidates():
+            # for i in random_move_candidates:
+            for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
@@ -811,7 +811,8 @@ class Game:
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
             newGame= game.clone()
-            for i in random_move_candidates:
+            # for i in random_move_candidates:
+            for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
@@ -833,8 +834,8 @@ class Game:
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
             newGame = game.clone()
-            for i in random_move_candidates:
-            # for i in game.move_candidates():
+            # for i in random_move_candidates:
+            for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
