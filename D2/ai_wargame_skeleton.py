@@ -820,14 +820,13 @@ class Game:
                 newGame.stats.evaluations_per_depth[depth+1] += 1
                 (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue ,start_time, False, alpha, beta)
                 print('max:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
-                temp_score = min(best_score, eval) #should be max
-                temp_beta = min(beta, temp_score) #should be max
+                temp_score = max(best_score, eval)
+                temp_alpha = max(alpha, temp_score)
                 if (beta <= alpha):
                     print('break max')
                     break
-                #needs to be fixed by changing beta to alpha.
                 best_move = i
-                beta = temp_beta #should be alpha
+                alpha = temp_alpha
                 best_score = temp_score
             return (best_score, best_move, avg_depth)   #return the max value
         else:
