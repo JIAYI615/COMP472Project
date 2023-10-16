@@ -688,6 +688,7 @@ class Game:
 
         # (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
         #need to be changed when alphaBeta is added
+        #need to change the input value for user type value
         if self.options.alpha_beta:
             (score, move, avg_depth) = self.alphaBeta(self.clone(), 0, self.next_player.value,start_time, self.next_player == Player.Attacker, MIN_HEURISTIC_SCORE, MAX_HEURISTIC_SCORE)
         else:
@@ -819,13 +820,14 @@ class Game:
                 newGame.stats.evaluations_per_depth[depth+1] += 1
                 (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue ,start_time, False, alpha, beta)
                 print('max:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
-                temp_score = min(best_score, eval)
-                temp_beta = min(beta, temp_score)
+                temp_score = min(best_score, eval) #should be max
+                temp_beta = min(beta, temp_score) #should be max
                 if (beta <= alpha):
                     print('break max')
                     break
+                #needs to be fixed by changing beta to alpha.
                 best_move = i
-                beta = temp_beta
+                beta = temp_beta #should be alpha
                 best_score = temp_score
             return (best_score, best_move, avg_depth)   #return the max value
         else:
