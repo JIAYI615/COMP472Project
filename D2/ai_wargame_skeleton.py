@@ -958,18 +958,18 @@ class Game:
         defender_num = 0
         for i in self.player_units(Player.Attacker):
             if i[1].type.name == "AI":
-                attacker_num = attacker_num + 9999
+                attacker_num = attacker_num + i[1].health*100
             elif i[1].type.name == "Virus":
-                attacker_num = attacker_num + 9
+                attacker_num = attacker_num + i[1].health*9
             else:
-                attacker_num = attacker_num + 3
+                attacker_num = attacker_num + i[1].health*3
         for i in self.player_units(Player.Defender):
             if i[1].type.name == "AI":
-                defender_num  = defender_num  + 9999
+                defender_num  = defender_num  +i[1].health*100
             elif i[1].type.name == "Tech":
-                defender_num  = defender_num  + 9
+                defender_num  = defender_num  +i[1].health*9
             else:
-                defender_num  = defender_num  + 3
+                defender_num  = defender_num  +i[1].health*3
         #attacker's value is 0, defender's value is 1
         if player == 0:
             return attacker_num-defender_num
