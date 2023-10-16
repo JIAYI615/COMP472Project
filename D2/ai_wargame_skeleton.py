@@ -756,8 +756,8 @@ class Game:
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
             newGame= game.clone()
-            # for i in random_move_candidates:
-            for i in game.move_candidates():
+            for i in random_move_candidates:
+            # for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
@@ -778,8 +778,8 @@ class Game:
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
             newGame = game.clone()
-            # for i in random_move_candidates:
-            for i in game.move_candidates():
+            for i in random_move_candidates:
+            # for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
@@ -811,8 +811,8 @@ class Game:
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
             newGame= game.clone()
-            # for i in random_move_candidates:
-            for i in game.move_candidates():
+            for i in random_move_candidates:
+            # for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
@@ -820,18 +820,18 @@ class Game:
                 newGame.next_turn()
                 newGame.stats.evaluations_per_depth[depth+1] += 1
                 (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue ,start_time, False, alpha, beta)
-                # if eval > best_score:
-                #     best_score = max(eval, best_score)
-                #     best_move = i
-                # alpha = max(alpha,best_score) #update alpha value
-                # if alpha >= beta: #cut the branch if the intersect is null
-                #     break
-                best_score = max(best_score, eval)
-                alpha = max(alpha, best_score)
-                if (beta <= alpha):
-                    break
-                if(best_score == eval):
+                if eval > best_score:
+                    best_score = max(eval, best_score)
                     best_move = i
+                alpha = max(alpha,best_score) #update alpha value
+                if alpha >= beta: #cut the branch if the intersect is null
+                    break
+                # best_score = max(best_score, eval)
+                # alpha = max(alpha, best_score)
+                # if (beta <= alpha):
+                #     break
+                # if(best_score == eval):
+                #     best_move = i
             return (best_score, best_move, avg_depth)   #return the max value
         else:
             best_score = MAX_HEURISTIC_SCORE
@@ -840,8 +840,8 @@ class Game:
             random_move_candidates = list(game.move_candidates())
             random.shuffle(random_move_candidates)
             newGame = game.clone()
-            # for i in random_move_candidates:
-            for i in game.move_candidates():
+            for i in random_move_candidates:
+            # for i in game.move_candidates():
                 if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
@@ -849,18 +849,18 @@ class Game:
                 newGame.next_turn()
                 newGame.stats.evaluations_per_depth[depth+1] += 1
                 (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue,start_time, True, alpha, beta)
-                # if eval < best_score:
-                #     best_score = min(eval, best_score)
-                #     best_move = i
-                # beta = min(beta,best_score)
-                # if alpha >= beta: #cut the branch if the intersect is null
-                #     break
-                best_score = min(best_score, eval)
-                beta = min(beta, best_score)
-                if (beta <= alpha):
-                    break
-                if(best_score == eval):
+                if eval < best_score:
+                    best_score = min(eval, best_score)
                     best_move = i
+                beta = min(beta,best_score)
+                if alpha >= beta: #cut the branch if the intersect is null
+                    break
+                # best_score = min(best_score, eval)
+                # beta = min(beta, best_score)
+                # if (beta <= alpha):
+                #     break
+                # if(best_score == eval):
+                #     best_move = i
             return (best_score, best_move, avg_depth)   #return the min value
 
     
@@ -1085,7 +1085,7 @@ def main():
 
      # create a new game
     game = Game(options=options)
-    # game.options.evaluation = 2
+    # game.options.evaluation = 1
 
     
     global f 
