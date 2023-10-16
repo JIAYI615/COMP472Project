@@ -819,11 +819,9 @@ class Game:
                 newGame.next_turn()
                 newGame.stats.evaluations_per_depth[depth+1] += 1
                 (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue ,start_time, False, alpha, beta)
-                print('max:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
                 best_score = max(best_score, eval)
                 alpha = max(alpha, best_score)
                 if (beta <= alpha):
-                    print('break max')
                     break
                 if(best_score == eval):
                     best_move = i
@@ -844,11 +842,9 @@ class Game:
                 newGame.next_turn()
                 newGame.stats.evaluations_per_depth[depth+1] += 1
                 (eval, move, avg_depth) = self.alphaBeta(newGame.clone(), depth+1, playerValue,start_time, True, alpha, beta)
-                print('min:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
                 best_score = min(best_score, eval)
                 beta = min(beta, best_score)
                 if (beta <= alpha):
-                    print('break min')
                     break
                 if(best_score == eval):
                     best_move = i
