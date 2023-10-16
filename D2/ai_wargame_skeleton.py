@@ -822,7 +822,7 @@ class Game:
                 print('max:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
                 temp_score = max(best_score, eval)
                 temp_alpha = max(alpha, temp_score)
-                if (beta <= alpha):
+                if (beta <= temp_alpha):
                     print('break max')
                     break
                 best_move = i
@@ -848,7 +848,7 @@ class Game:
                 print('min:\neval:'+str(eval)+' move:'+str(move)+' avg_depth:'+str(avg_depth))
                 temp_score = min(best_score, eval)
                 temp_beta = min(beta, temp_score)
-                if (beta <= alpha):
+                if (temp_beta <= alpha):
                     print('break min')
                     break
                 best_move = i
