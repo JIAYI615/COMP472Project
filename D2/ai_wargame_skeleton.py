@@ -690,9 +690,9 @@ class Game:
         #need to be changed when alphaBeta is added
         #need to change the input value for user type value
         if self.options.alpha_beta:
-            (score, move, avg_depth) = self.alphaBeta(self.clone(), 0, self.next_player.value,start_time, self.next_player == Player.Attacker, MIN_HEURISTIC_SCORE, MAX_HEURISTIC_SCORE)
+            (score, move, avg_depth) = self.alphaBeta(self.clone(), 0, self.next_player.value,start_time, True, MIN_HEURISTIC_SCORE, MAX_HEURISTIC_SCORE)
         else:
-            (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, self.next_player == Player.Attacker)
+            (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
         f.write("This is for : " + str(self.next_player.name)+'\n')
