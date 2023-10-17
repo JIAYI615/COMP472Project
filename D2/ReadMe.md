@@ -1,4 +1,6 @@
-Once the AI's search reaches the time limit, it will be forced to return the current best move. Because the ai iterate the board in a fixed way, to avoid returning the same move all the time, the list the moves will be shuffled randomly every time so that the ai will perform different moves.
+Once the AI's search reaches the time limit, it will be forced to return the current best move. Because the ai iterate the board in a fixed way, to avoid returning the same move all the time, the list the moves will be shuffled randomly every time so that the ai will perform different moves.  
+
+Th move returning time is set to 0.01, when it is detected that the time left is less than o.o1 the algorithm will start to return the current best move. If the returning time exceeds 0.01, the current ai will lose the game automatically.  
 
 The heuristic designed:  
 For both heuristics, the weight of AI's existence is 9999 to make sure the program will be able to detect win/lose cases.
