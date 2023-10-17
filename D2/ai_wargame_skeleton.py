@@ -678,6 +678,8 @@ class Game:
         start_time = datetime.now()
         # (score, move, avg_depth) = self.random_move()
         # python3 ai_wargame_skeleton.py --game_type auto --max_depth 2 --alpha_beta true
+        # python3 ai_wargame_skeleton.py --game_type auto --alpha_beta true
+        # python3 ai_wargame_skeleton.py --game_type auto
         i = 0
         while i <= self.options.max_depth:
             self.stats.evaluations_per_depth[i] = 0
@@ -694,6 +696,8 @@ class Game:
         else:
             (score, move, avg_depth) = self.miniMax(self.clone(), 0, self.next_player.value,start_time, True)
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
+        if elapsed_seconds > self.options.max_time:
+            return None
         self.stats.total_seconds += elapsed_seconds
         f.write("This is for : " + str(self.next_player.name)+'\n')
         f.write("Heuristic score: " + str(score)+'\n')
@@ -758,7 +762,7 @@ class Game:
             newGame= game.clone()
             for i in random_move_candidates:
             # for i in game.move_candidates():
-                if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time-0.01:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
                 newGame.perform_move(i)
@@ -780,7 +784,7 @@ class Game:
             newGame = game.clone()
             for i in random_move_candidates:
             # for i in game.move_candidates():
-                if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time-0.01:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
                 newGame.perform_move(i)
@@ -813,7 +817,7 @@ class Game:
             newGame= game.clone()
             for i in random_move_candidates:
             # for i in game.move_candidates():
-                if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time-0.01:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
                 newGame.perform_move(i)
@@ -842,7 +846,7 @@ class Game:
             newGame = game.clone()
             for i in random_move_candidates:
             # for i in game.move_candidates():
-                if (datetime.now() - start_time).total_seconds() > self.options.max_time:   #if AI exceed the time
+                if (datetime.now() - start_time).total_seconds() > self.options.max_time-0.01:   #if AI exceed the time
                     return (best_score, best_move, avg_depth)
                 newGame = game.clone()
                 newGame.perform_move(i)
@@ -1085,7 +1089,7 @@ def main():
 
      # create a new game
     game = Game(options=options)
-    # game.options.evaluation = 1
+    # game.options.evaluation = 2
 
     
     global f 
