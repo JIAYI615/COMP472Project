@@ -830,12 +830,6 @@ class Game:
                 alpha = max(alpha,best_score) #update alpha value
                 if alpha >= beta: #cut the branch if the intersect is null
                     break
-                # best_score = max(best_score, eval)
-                # alpha = max(alpha, best_score)
-                # if (beta <= alpha):
-                #     break
-                # if(best_score == eval):
-                #     best_move = i
             return (best_score, best_move, avg_depth)   #return the max value
         else:
             best_score = MAX_HEURISTIC_SCORE
@@ -859,12 +853,6 @@ class Game:
                 beta = min(beta,best_score)
                 if alpha >= beta: #cut the branch if the intersect is null
                     break
-                # best_score = min(best_score, eval)
-                # beta = min(beta, best_score)
-                # if (beta <= alpha):
-                #     break
-                # if(best_score == eval):
-                #     best_move = i
             return (best_score, best_move, avg_depth)   #return the min value
 
     
